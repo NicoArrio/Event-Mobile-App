@@ -14,7 +14,7 @@ function App(): React.JSX.Element {
 
 const styles = StyleSheet.create({
   container:{
-    backgroundColor: 'rgba( 17, 17, 17, 355)'
+    backgroundColor: '#141414'
   }
 })
 
