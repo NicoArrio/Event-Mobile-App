@@ -14,7 +14,7 @@ const News = () => {
                 <Text style={styles.TitleText}>Cumple Nico </Text>
             </View>
             <View>
-                <Text style={styles.Text}>La fiesta sera el miercoles 21 de diciembre en segui 1414. El anfitrion se encarga de comprar las bebidas. Ustedes solo tienen que pasar el monto especificado</Text>
+                <Text style={styles.Text}>La joda sera el sabado 21 de diciembre en segui 1414. El anfitrion se encarga de comprar las bebidas. Ustedes solo tienen que pasar el monto especificado</Text>
             </View>
             <View style={styles.newsTextContainer}>
                 <Text style={styles.newsText}>Novedades</Text>
@@ -25,6 +25,12 @@ const News = () => {
                         <Image source={require('../../images/tequila.jpeg')} style={styles.bubbleImage}/>
                         <Text style={styles.bubbleText}>Habra Tequila!!</Text>
                     </View>
+                </View>
+                <View style={styles.bubble}>
+                    <Text style={styles.bubbleText}>Habra Tequila!!</Text>
+                </View>
+                <View style={styles.bubble}>
+                    <Text style={styles.bubbleText}>Habra Tequila!!</Text>
                 </View>
                 <View style={styles.bubble}>
                     <Text style={styles.bubbleText}>Habra Tequila!!</Text>
