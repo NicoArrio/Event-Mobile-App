@@ -35,6 +35,9 @@ const News = () => {
                 <View style={styles.bubble}>
                     <Text style={styles.bubbleText}>Habra Tequila!!</Text>
                 </View>
+                <View style={styles.bubble}>
+                    <Text style={styles.bubbleText}>Habra Tequila!!</Text>
+                </View>
             </ScrollView>
         </View>
     )
