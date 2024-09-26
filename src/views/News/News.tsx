@@ -1,5 +1,6 @@
 import React from "react";
 import { View,Text,StyleSheet,Image,ScrollView} from "react-native";
+import CalendarioFechasRestantes from "../../components/Header/Calendar"
 
 const News = () => {
     return(
@@ -8,37 +9,66 @@ const News = () => {
                 <Text style={styles.subtitle}>eVent</Text>
             </View>
             <View style={styles.ImageContainer}>
-                <Image source={require('../../images/calenFechaCalidad.png')} style={styles.ImageCalendar}/>
+                <Image 
+                source={require('../../images/calenFechaCalidad.png')} 
+                style={styles.ImageCalendar}/>
             </View>
             <View style={styles.TitleTextContainer}>
                 <Text style={styles.TitleText}>Cumple Nico </Text>
             </View>
             <View>
-                <Text style={styles.Text}>La joda sera el sabado 21 de diciembre en segui 1414. El anfitrion se encarga de comprar las bebidas. Ustedes solo tienen que pasar el monto especificado</Text>
+                <Text 
+                style={styles.Text}>La joda sera el sabado 21 de diciembre en segui 1414. El anfitrion se encarga de comprar las bebidas. Ustedes solo tienen que pasar el monto especificado
+                </Text>
             </View>
             <View style={styles.newsTextContainer}>
                 <Text style={styles.newsText}>Novedades</Text>
             </View>
-            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} style={styles.bubbleContainer}>
+            <ScrollView 
+                horizontal={true} 
+                showsHorizontalScrollIndicator={false} 
+                style={styles.bubbleContainer}
+                >
                 <View style={styles.BubbleContainerImage}>
                     <View style={styles.bubble}>
-                        <Image source={require('../../images/tequila.jpeg')} style={styles.bubbleImage}/>
+                        <Image 
+                        source={require('../../images/tequila.jpeg')} 
+                        style={styles.bubbleImage}/>
                         <Text style={styles.bubbleText}>Habra Tequila!!</Text>
                     </View>
                 </View>
-                <View style={styles.bubble}>
-                    <Text style={styles.bubbleText}>Habra Tequila!!</Text>
+                
+                <View style={styles.BubbleContainerImage}>
+                    <View style={styles.bubble}>
+                        <Image 
+                        source={require('../../images/dj.png')} 
+                        style={styles.bubbleImage}/>
+                        <Text style={styles.bubbleText}>Habra Tequila!!</Text>
+                    </View>
                 </View>
-                <View style={styles.bubble}>
-                    <Text style={styles.bubbleText}>Habra Tequila!!</Text>
+
+                <View style={styles.BubbleContainerImage}>
+                    <View style={styles.bubble}>
+                        <Image 
+                        source={require('../../images/dj.png')} 
+                        style={styles.bubbleImage}/>
+                        <Text style={styles.bubbleText}>Habra Tequila!!</Text>
+                    </View>
                 </View>
-                <View style={styles.bubble}>
-                    <Text style={styles.bubbleText}>Habra Tequila!!</Text>
+                
+                <View style={styles.BubbleContainerImage}>
+                    <View style={styles.bubble}>
+                        <Image 
+                        source={require('../../images/dj.png')} 
+                        style={styles.bubbleImage}/>
+                        <Text style={styles.bubbleText}>Habra Tequila!!</Text>
+                    </View>
                 </View>
-                <View style={styles.bubble}>
-                    <Text style={styles.bubbleText}>Habra Tequila!!</Text>
-                </View>
+                
             </ScrollView>
+            <View>
+                <CalendarioFechasRestantes/>
+            </View>
         </View>
     )
 }
