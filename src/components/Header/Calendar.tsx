@@ -36,7 +36,7 @@ const CalendarioFechasRestantes: React.FC = () => {
         markingType={'custom'}
         style={styles.calendar}
         theme={{
-          calendarBackground: '#000000',  // Fondo negro
+          calendarBackground: '#141414',  // Fondo negro
           textSectionTitleColor: '#ffffff',  // Meses y días en blanco
           dayTextColor: '#ffffff',  // Días en blanco
           todayTextColor: '#00adf5',  // Color del texto del día actual
