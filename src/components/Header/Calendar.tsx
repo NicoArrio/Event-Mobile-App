@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import moment from 'moment';
 
@@ -45,6 +45,7 @@ const CalendarioFechasRestantes: React.FC = () => {
           arrowColor: '#ffffff',  // Color de las flechas
           monthTextColor: '#ffffff',  // Color del texto del mes
           textMonthFontWeight: 'bold',  // Mes en negrita
+          ImageBackground: '#fffffff'
         }}
       />
       <Text style={styles.countdownText}>
