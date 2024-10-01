@@ -1,78 +1,118 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 import moment from 'moment';
 
 const CalendarioFechasRestantes: React.FC = () => {
-  const targetDate: string = '2024-12-18';  // Fecha objetivo
-  const today: string = moment().format('YYYY-MM-DD');
+    const endDate = '2024-12-21'; // Fecha objetivo
+    const [markedDates, setMarkedDates] = useState<{[key: string]: any}>({});
+    const [countdown, setCountdown] = useState({ months: 0, weeks: 0, days: 0 });
 
-  const [markedDates, setMarkedDates] = useState<{ [key: string]: { marked: boolean; dotColor: string; disableTouchEvent: boolean } }>({});
+    useEffect(() => {
+        calculateCountdown();
+        markDates();
+    }, []);
 
-  useEffect(() => {
-    const calculateMarkedDates = () => {
-      const startDate = moment(today);
-      const endDate = moment(targetDate);
-
-      let dates: { [key: string]: { marked: boolean; dotColor: string; disableTouchEvent: boolean } } = {};
-      for (let m = moment(startDate); m.isBefore(endDate); m.add(1, 'days')) {
-        const formattedDate = m.format('YYYY-MM-DD');
-        dates[formattedDate] = { 
-          marked: true, 
-          dotColor: 'red', 
-          disableTouchEvent: true 
+    const markDates = () => {
+        const today = moment().format('YYYY-MM-DD');
+        const dates = {
+            [endDate]: {
+                customStyles: {
+                    container: { backgroundColor: 'red', elevation: 2 },
+                    text: { color: 'white' }
+                }
+            }
         };
-      }
-      setMarkedDates(dates);
+
+        if (moment(endDate).isAfter(today)) {
+            // Asegurarse de que sólo se marca la fecha específica si es futura
+            setMarkedDates(dates);
+        }
     };
 
-    calculateMarkedDates();
-  }, [today, targetDate]);
+    const calculateCountdown = () => {
+        const today = moment();
+        const targetDate = moment(endDate);
+        const months = targetDate.diff(today, 'months');
+        today.add(months, 'months');
+        const weeks = targetDate.diff(today, 'weeks');
+        today.add(weeks, 'weeks');
+        const days = targetDate.diff(today, 'days');
 
-  return (
-    <View style={styles.container}>
-      <Calendar
-        markedDates={markedDates}
-        markingType={'custom'}
-        style={styles.calendar}
-        theme={{
-          calendarBackground: '#141414',  // Fondo negro
-          textSectionTitleColor: '#ffffff',  // Meses y días en blanco
-          dayTextColor: '#ffffff',  // Días en blanco
-          todayTextColor: '#00adf5',  // Color del texto del día actual
-          selectedDayBackgroundColor: '#ffffff',  // Fondo del día seleccionado
-          selectedDayTextColor: '#000000',  // Texto del día seleccionado
-          arrowColor: '#ffffff',  // Color de las flechas
-          monthTextColor: '#ffffff',  // Color del texto del mes
-          textMonthFontWeight: 'bold',  // Mes en negrita
-          ImageBackground: '#fffffff'
-        }}
-      />
-      <Text style={styles.countdownText}>
-        Faltan {moment(targetDate).diff(today, 'months')} meses, {moment(targetDate).diff(today, 'weeks')} semanas, {moment(targetDate).diff(today, 'days')} días
-      </Text>
-    </View>
-  );
+        setCountdown({ months, weeks, days });
+    };
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.calendarHeaderContainer}>
+              <Text style={styles.calendarHeaderText}>Calendario</Text>
+            </View>
+            <Calendar
+                markingType={'custom'}
+                markedDates={markedDates}
+                style={{
+                    borderWidth: 1,
+                    borderColor: 'gray',
+                    marginTop: 10, //distancia entre el calendario y las texto calendario
+                }}
+            />
+            {/* Visualización del contador */}
+            <Text style={styles.countdownLabel}>Faltan</Text>
+            <View style={styles.countdownContainer}>
+                <Text style={styles.countdownValue}>
+                    <Text style={styles.number}>{countdown.months}</Text> <Text style={styles.unit}>meses </Text>
+                    <Text style={styles.number}>{countdown.weeks}</Text> <Text style={styles.unit}>semanas </Text>
+                    <Text style={styles.number}>{countdown.days}</Text> <Text style={styles.unit}>días</Text>
+                </Text>
+            </View>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',  // Centra el contenido verticalmente
-    alignItems: 'center',  // Centra el contenido horizontalmente
-    padding: 16,
-    backgroundColor: '#000',  // Fondo negro
+    justifyContent: 'center',
+},
+calendarHeaderContainer: {
+    marginTop: -50,
+    alignSelf: 'flex-start', // Alinea a la izquierda dentro del contenedor
+    marginLeft: 5,
+    width: '100%', // Asegura que el contenedor ocupe el ancho completo
+},
+calendarHeaderText: {
+    fontSize: 32, // Tamaño de fuente grande para destacar
+    color: '#fff', // Color blanco
+    fontFamily: 'RobotoMono-Medium',
+    textShadowColor: '#9E9E9E',
+    textShadowOffset: { width: -3, height: 3 },
+    textShadowRadius: 2,
+},
+  countdownLabel: {
+    fontSize: 30, // Tamaño de fuente grande para destacar
+    color: '#fff', // Color blanco
+    fontFamily: 'RobotoMono-Medium',
+    marginTop: 20, // Espacio entre el calendario y el texto "Faltan"
+    marginBottom: -5, // Espacio entre "Faltan" y los números
+    textAlign: 'center' // Centra el texto "Faltan"
   },
-  calendar: {
-    backgroundColor: '#000',  // Fondo negro
-    width: '100%',  // Ajusta el ancho del calendario al 100% del contenedor
+  countdownContainer: {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      backgroundColor: '#141414',
+      padding: 5,
   },
-  countdownText: {
-    fontSize: 20,
-    color: '#fff',
-    textAlign: 'center',
-    marginTop: 16,
+  countdownValue: {
+      fontSize: 20,
   },
+  number: {
+      color: 'white',
+      marginRight: 5, // Añade un pequeño espacio entre el número y la unidad
+  },
+  unit: {
+      color: 'red',
+      fontFamily: 'RobotoMono-Regular',
+  }
 });
 
 export default CalendarioFechasRestantes;

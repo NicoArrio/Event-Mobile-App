@@ -1,19 +1,15 @@
 import React from "react";
-import { View, StyleSheet, Text } from 'react-native';
+import { View} from 'react-native';
 
 import News from "../News";
+import Friends from '../Friends';
 const Home = () => {
     return (
         <View>
-            <News/>
+            <Friends/>
         </View>
     )
 }
 
-const styles = StyleSheet.create({
-    container:{
-        backgroundColor: '#FFF',
-        fontSize: 20,
-    }
-})
+
 export default Home;

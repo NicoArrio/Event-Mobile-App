@@ -1,91 +1,83 @@
 import React from "react";
 import { View,Text,StyleSheet,Image,ScrollView} from "react-native";
+
 import CalendarioFechasRestantes from "../../components/Header/Calendar"
+import CalendarNews from "../../components/Header/CalendarNews";
+import Header from "../../components/Header/Header";
+
 
 const News = () => {
     return(
-        <View style={styles.container}>
-            <View>
-                <Text style={styles.subtitle}>eVent</Text>
-            </View>
-            <View style={styles.ImageContainer}>
-                <Image 
-                source={require('../../images/calenFechaCalidad.png')} 
-                style={styles.ImageCalendar}/>
-            </View>
-            <View style={styles.TitleTextContainer}>
-                <Text style={styles.TitleText}>Cumple Nico </Text>
-            </View>
-            <View>
-                <Text 
-                style={styles.Text}>La joda sera el sabado 21 de diciembre en segui 1414. El anfitrion se encarga de comprar las bebidas. Ustedes solo tienen que pasar el monto especificado
-                </Text>
-            </View>
-            <View style={styles.newsTextContainer}>
-                <Text style={styles.newsText}>Novedades</Text>
-            </View>
-            <ScrollView 
-                horizontal={true} 
-                showsHorizontalScrollIndicator={false} 
-                style={styles.bubbleContainer}
-                >
-                <View style={styles.BubbleContainerImage}>
-                    <View style={styles.bubble}>
-                        <Image 
-                        source={require('../../images/tequila.jpeg')} 
-                        style={styles.bubbleImage}/>
-                        <Text style={styles.bubbleText}>Habra Tequila!!</Text>
-                    </View>
-                </View>
-                
-                <View style={styles.BubbleContainerImage}>
-                    <View style={styles.bubble}>
-                        <Image 
-                        source={require('../../images/dj.png')} 
-                        style={styles.bubbleImage}/>
-                        <Text style={styles.bubbleText}>Habra Tequila!!</Text>
-                    </View>
+        <ScrollView style={styles.scrollViewStyle}> 
+            <View style={styles.container}>
+
+                {/* COMPONENTE HEADER  */}
+                <View>
+                    <Header/>
                 </View>
 
-                <View style={styles.BubbleContainerImage}>
-                    <View style={styles.bubble}>
-                        <Image 
-                        source={require('../../images/dj.png')} 
-                        style={styles.bubbleImage}/>
-                        <Text style={styles.bubbleText}>Habra Tequila!!</Text>
-                    </View>
+                {/* COMPONENTE IMAGEN  */}
+                <View style={styles.ImageContainer}>
+                    <Image 
+                    source={require('../../images/calenFechaCalidad.png')} 
+                    style={styles.ImageCalendar}/>
+                </View>
+
+                {/* COMPONENTE TEXTO  */}
+                <View style={styles.TitleTextContainer}>
+                    <Text style={styles.TitleText}>Cumple Nico </Text>
+                </View>
+                <View>
+                    <Text style={styles.Text}>
+                    <Text>
+                        Me complace invitarlos a celebrar como me hago cada vez más viejo! 
+                        Todos los años siempre me peleaba con el excel para administrar y 
+                        organizar este evento, por eso este año decidí crear una </Text>
+                    <Text style={styles.highlighted}>app que se encargará de todo.</Text>
+                    {"\n\n"}
+                    <Text>
+                        Para que todos podamos disfrutar al máximo, nuestro anfitrión se 
+                        encargará de adquirir todas las bebidas necesarias para la ocasión, 
+                        así que ustedes solo tendrán que </Text>
+                        <Text style={styles.highlighted}>contribuir con el monto especificado 
+                        </Text>
+                        <Text> previamente para cubrir los gastos.</Text>
+                    {"\n\n"}
+                    <Text>
+                        Confirmen su asistencia lo antes posible para que podamos organizar 
+                        todo de la mejor manera.</Text>
+                    <Text style={styles.highlighted}>El sábado 21 de diciembre </Text>
+                    <Text>se realizara el evento, la dirección es </Text>
+                    <Text style={styles.highlighted}>Seguí 1414.</Text>
+                    </Text>
                 </View>
                 
-                <View style={styles.BubbleContainerImage}>
-                    <View style={styles.bubble}>
-                        <Image 
-                        source={require('../../images/dj.png')} 
-                        style={styles.bubbleImage}/>
-                        <Text style={styles.bubbleText}>Habra Tequila!!</Text>
-                    </View>
+                {/* COMPONENTE NOVEDADES  */}
+                <View>
+                    <CalendarNews/>
                 </View>
                 
-            </ScrollView>
-            <View>
-                <CalendarioFechasRestantes/>
+                {/* COMPONENTE CALENDARIO  */}
+                <View>
+                    <CalendarioFechasRestantes/>
+                </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
+    scrollViewStyle: {
+        //flex: 1, // Asegura que ScrollView tome toda la pantalla
+    },
     container: {
         padding: 22,
     },
-    subtitle: {
-        fontSize: 36, 
-        color: '#C1212F', 
-        fontWeight: 'bold',
-        fontStyle: 'italic', // Estilo en cursiva
-        textDecorationLine: 'underline', // Subrayado
-        alignSelf: 'flex-start', // Alineado a la izquierda
-        marginBottom: 16, // Espacio debajo del título
-    },ImageContainer:{
+    paragraph: {
+        fontFamily: 'RobotoMono-Regular', // Asegúrate de usar el nombre exacto del archivo de fuente
+        fontSize: 16, // Ajusta según la necesidad
+    },
+    ImageContainer:{
         alignItems: 'center',
     },
     ImageCalendar:{
@@ -98,58 +90,23 @@ const styles = StyleSheet.create({
     },
     TitleText:{
         fontSize: 28, 
-        color: '#fff', 
-        fontWeight: 'bold',
+        fontFamily: 'RobotoMono-Regular',
+        color: '#fff',
         marginBottom: 8, // Espacio debajo del título
-    },
-    TextContainer:{
-        alignItems: 'flex-start',
     },
     Text:{
         fontSize: 16, 
+        fontFamily: 'RobotoMono-Regular',
         color: '#fff',
         lineHeight: 24, // Mejorar legibilidad
     },
-    newsTextContainer:{
-        marginTop: 20, // Espacio superior para separar de la descripción
-        alignItems: 'flex-end',
-    },
-    newsText:{
-        fontSize: 28, // Tamaño de fuente grande para destacar
-        color: '#fff', // Color blanco
-        fontWeight: 'bold', // Negrita
-        textShadowColor: '#9E9E9E', // Efecto de sombra
-        textShadowOffset: { width: -3, height: 3 }, // Desplazamiento de la sombra
-        textShadowRadius: 2, // Difusión de la sombra
-    },
-    bubbleContainer: {
-        marginTop: 20,
-        flexDirection: 'row',
-    },
-    BubbleContainerImage:{
-        width: 120, // Ajusta el tamaño del círculo
-        height: 200,
-    },
-    bubble: {
-        width: 100, // Ajusta el tamaño del círculo
-        height: 100,
-        borderRadius: 50, // Hace la imagen circular
-        backgroundColor: '#fff', // Fondo blanco para que se vea como un círculo
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginRight: 16, // Espacio entre burbujas
-    },
-    bubbleImage: {
-        width: 90, // Ajusta el tamaño de la imagen dentro de la burbuja
-        height: 90,
-        borderRadius: 50, // Hace la imagen circular
-    },
-    bubbleText: {
-        marginTop: 8,
-        fontSize: 12,
-        color: '#C1212F',
-        textAlign: 'center',
-    },
+    highlighted: {
+      fontFamily: 'RobotoMono-Regular',
+      color: '#ff0000', // Rojo para destacar
+      textShadowColor: 'rgba(255, 0, 0, 0.5)', // Sombra roja
+      textShadowOffset: { width: 1, height: 1 },
+      textShadowRadius: 1,
+    }
 })
 
 export default News
