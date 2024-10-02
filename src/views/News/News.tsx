@@ -8,7 +8,7 @@ import Header from "../../components/Header/Header";
 
 const News = () => {
     return(
-        <ScrollView style={styles.scrollViewStyle}> 
+        <ScrollView> 
             <View style={styles.container}>
 
                 {/* COMPONENTE HEADER  */}
@@ -67,11 +67,9 @@ const News = () => {
 }
 
 const styles = StyleSheet.create({
-    scrollViewStyle: {
-        //flex: 1, // Asegura que ScrollView tome toda la pantalla
-    },
     container: {
-        padding: 22,
+        padding: 12,
+        flex:1,
     },
     paragraph: {
         fontFamily: 'RobotoMono-Regular', // Asegúrate de usar el nombre exacto del archivo de fuente
