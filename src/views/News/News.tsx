@@ -12,9 +12,7 @@ const News = () => {
             <View style={styles.container}>
 
                 {/* COMPONENTE HEADER  */}
-                <View>
-                    <Header/>
-                </View>
+                <Header/>
 
                 {/* COMPONENTE IMAGEN  */}
                 <View style={styles.ImageContainer}>

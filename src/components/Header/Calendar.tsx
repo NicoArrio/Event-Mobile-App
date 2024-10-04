@@ -70,49 +70,49 @@ const CalendarioFechasRestantes: React.FC = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-},
-calendarHeaderContainer: {
-    marginTop: -50,
-    alignSelf: 'flex-start', // Alinea a la izquierda dentro del contenedor
-    marginLeft: 5,
-    width: '100%', // Asegura que el contenedor ocupe el ancho completo
-},
-calendarHeaderText: {
-    fontSize: 32, // Tamaño de fuente grande para destacar
-    color: '#fff', // Color blanco
-    fontFamily: 'RobotoMono-Medium',
-    textShadowColor: '#9E9E9E',
-    textShadowOffset: { width: -3, height: 3 },
-    textShadowRadius: 2,
-},
-  countdownLabel: {
-    fontSize: 30, // Tamaño de fuente grande para destacar
-    color: '#fff', // Color blanco
-    fontFamily: 'RobotoMono-Medium',
-    marginTop: 20, // Espacio entre el calendario y el texto "Faltan"
-    marginBottom: -5, // Espacio entre "Faltan" y los números
-    textAlign: 'center' // Centra el texto "Faltan"
-  },
-  countdownContainer: {
-      flexDirection: 'row',
-      justifyContent: 'center',
-      backgroundColor: '#141414',
-      padding: 5,
-  },
-  countdownValue: {
-      fontSize: 20,
-  },
-  number: {
-      color: 'white',
-      marginRight: 5, // Añade un pequeño espacio entre el número y la unidad
-  },
-  unit: {
-      color: 'red',
-      fontFamily: 'RobotoMono-Regular',
-  }
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    calendarHeaderContainer: {
+        marginTop: -50,
+        alignSelf: 'flex-start', // Alinea a la izquierda dentro del contenedor
+        marginLeft: 5,
+        width: '100%', // Asegura que el contenedor ocupe el ancho completo
+    },
+    calendarHeaderText: {
+        fontSize: 32, // Tamaño de fuente grande para destacar
+        color: '#fff', // Color blanco
+        fontFamily: 'RobotoMono-Medium',
+        textShadowColor: '#9E9E9E',
+        textShadowOffset: { width: -3, height: 3 },
+        textShadowRadius: 2,
+    },
+    countdownLabel: {
+        fontSize: 30, // Tamaño de fuente grande para destacar
+        color: '#fff', // Color blanco
+        fontFamily: 'RobotoMono-Medium',
+        marginTop: 20, // Espacio entre el calendario y el texto "Faltan"
+        marginBottom: -5, // Espacio entre "Faltan" y los números
+        textAlign: 'center' // Centra el texto "Faltan"
+    },
+    countdownContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        backgroundColor: '#141414',
+        padding: 5,
+    },
+    countdownValue: {
+        fontSize: 20,
+    },
+    number: {
+        color: 'white',
+        marginRight: 5, // Añade un pequeño espacio entre el número y la unidad
+    },
+    unit: {
+        color: 'red',
+        fontFamily: 'RobotoMono-Regular',
+    }
 });
 
 export default CalendarioFechasRestantes;

@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
 
 const CalendarNews = () => {
