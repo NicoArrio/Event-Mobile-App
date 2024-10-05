@@ -10,7 +10,7 @@ const Users = () => {
             >
                 <View style={styles.cardContainer}>
                     <Image
-                        source={require('../../images/gaston.jpeg')}
+                        source={require('../../../images/gaston.jpeg')}
                         //source={{ uri: 'https://your-image-url.com/image.jpg' }} // Reemplaza con tu URL de imagen
                         style={styles.image}
                     />

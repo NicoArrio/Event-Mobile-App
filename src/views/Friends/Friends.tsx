@@ -1,12 +1,30 @@
-import React from "react";
-import { StyleSheet, Text, View, ScrollView, TextInput} from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, ScrollView, TextInput, Alert} from "react-native";
 import { Button, Icon, Input } from "@rneui/themed";
 
 import Headers from '../../components/Header/Header'
-import Users from "../../components/Header/Users";
+import Users from "../../components/Header/FriendsComponents/Users";
+import AddFriendLocal from "../../components/Header/FriendsComponents/AddFriendLocal";
+import useFriendLocalStorage from "../../hooks/useFriendLocalStorage";
 
 
 const Friends = () => {
+    const [visible, setIsVisible] = useState<boolean>(false); //cons de estado reactiva, conforme le des click
+    const {onGetUser} = useFriendLocalStorage()
+
+    const handleModalClose = async (shouldUpdate?: boolean) => { //save and close exitoso del modal y reseteo
+        if (shouldUpdate){
+            Alert.alert('Comida guardada exitosamente')//si actualizamos, mostramos una alerta
+            try {
+                const userResponse = await onGetUser() //trae todo lo guardado en el asyncStorage
+                console.log(userResponse)
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        setIsVisible(false);
+    };
+
     return(
         <ScrollView> 
             <View style={styles.container}>
@@ -38,15 +56,18 @@ const Friends = () => {
                     <View style={styles.leftAddContainer}>
                         <Text style={styles.listLegend}>Agregar Invitados</Text>
                     </View>
-                    <View style={styles.rightAddContainer}>
+                    <View>
                         <Button
                             icon={<Icon name="add" color="#000" />}
                             radius="lg"
                             color="#ffff"
+                            onPress={() => setIsVisible(true)}
                         />
                     </View>
                 </View>
 
+                <AddFriendLocal visible={visible} onClose={handleModalClose}/>
+                
                 {/* COMPONENTE USUARIOS */}
                 <Users/>
             </View>
@@ -111,7 +132,6 @@ const styles = StyleSheet.create({
     leftAddContainer:{
         flex:1,
     },
-    rightAddContainer:{},
     
 })
 
