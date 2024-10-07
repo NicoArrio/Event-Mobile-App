@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from "react";
 import { StyleSheet, View, Text, Modal,Image} from "react-native";
 import { Button, Icon, Input } from "@rneui/themed";
-//import { launchImageLibrary } from 'react-native-image-picker';
+import { launchImageLibrary } from 'react-native-image-picker';
 import useFriendLocalStorage from "../../../hooks/useFriendLocalStorage";
 
 
@@ -14,14 +14,17 @@ const addFriendLocal: FC<AddFriendModalProps> = ({ onClose, visible }) => {
     const [name, setName] = useState<string>('');
     const [age, setAge] = useState<string>('');
     const [description,setDescription] = useState<string>(''); 
-    // const [imageUri, setImageUri] = useState(null);
-    const {onSaveUser} = useFriendLocalStorage()
+    const [signo,setSigno]=useState<string>('');
+    const [imageUri, setImageUri] = useState<string | undefined>();
+    const {onSaveUser} = useFriendLocalStorage();
 
     //reseteo del formulario
     useEffect(()=>{
-        setName('')
-        setAge('')
-        setDescription('')
+        setName('');
+        setAge('');
+        setDescription('');
+        setSigno('');
+        setImageUri(undefined); // Resetear también la imagen
     },[visible]);
 
     //cierre form al clickear save
@@ -31,6 +34,8 @@ const addFriendLocal: FC<AddFriendModalProps> = ({ onClose, visible }) => {
                 name,
                 age,
                 description,
+                signo,
+                imageUri,
             })
             onClose(true); //actualiza y trae todos los elementos
         } catch (error) {
@@ -38,18 +43,17 @@ const addFriendLocal: FC<AddFriendModalProps> = ({ onClose, visible }) => {
         }
         
     }
-    
 
-    // const handleChoosePhoto = () => {
-    //     const options = {
-    //         mediaType: 'photo', // Ajustado para especificar que sólo queremos fotos
-    //     };
-    //     launchImageLibrary(options, response => {
-    //         if (response.assets && response.assets[0].uri) { // Ajustado para acceder correctamente a la URI
-    //             setImageUri(response.assets[0].uri);
-    //         }
-    //     });
-    // };
+    const handleChoosePhoto = () => {
+        const options = {
+            mediaType: 'photo' as const, // Corrección aquí usando 'as const'
+        };
+        launchImageLibrary(options, response => {
+            if (response.assets && response.assets[0].uri) { // Ajustado para acceder correctamente a la URI
+                setImageUri(response.assets[0].uri);
+            }
+        });
+    };
 
     return (
         <Modal visible={visible} onRequestClose={() => onClose(false)} transparent> 
@@ -95,14 +99,27 @@ const addFriendLocal: FC<AddFriendModalProps> = ({ onClose, visible }) => {
                             />
                         </View>
                         <View style={styles.legendContainer}>
-                            <Text style={styles.legendContent}>descripcion</Text>
+                            <Text style={styles.legendContent}>descripcion-max110</Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.formItem}>
+                        <View style={styles.inputContainer}>
+                            <Input
+                                value={signo} 
+                                onChangeText={(text: string) => setSigno(text)}
+                            />
+                        </View>
+                        <View style={styles.legendContainer}>
+                            <Text style={styles.legendContent}>signo</Text>
                         </View>
                     </View>
                     
-                    {/* {imageUri && (
+                    {/* C A R G A R    I M A G E N    L O C A L */}
+                    {imageUri && (
                         <Image source={{ uri: imageUri }} style={styles.imageContainer} />
                     )}
-                    <Button title="Cargar Imagen" onPress={handleChoosePhoto} /> */}
+                    <Button title="Cargar Imagen" onPress={handleChoosePhoto} />
                     
                     <View style={styles.buttonContainer}>
                         <Button 

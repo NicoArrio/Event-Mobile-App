@@ -1,31 +1,39 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
 import { Guest } from "../types"
+import { MY_USER_LOCAL_KEY } from "../constants";
+
 
 const useFriendLocalStorage = () => {
-
-    const MY_USER_LOCAL_KEY = "@MyUser:Key"//mi key
-
-    //crear/guardar informacion de usuario 
-    const handleSaveUser = async({name, age, description}:Guest) => {
-        try {
-            const currentSavedUser = await AsyncStorage.getItem(MY_USER_LOCAL_KEY) //trae la key de AsyncStorage
-            let currentSavedUserParsed;
     
-            if (currentSavedUser !== null) {
-                // Si hay datos, los parseamos a forma de arreglo de JSON
-                currentSavedUserParsed = JSON.parse(currentSavedUser);
-            } else {
-                // Si no hay datos, inicializamos un arreglo vacío, primer ciclo
+    //crear/guardar informacion de usuario 
+    const handleSaveUser = async({name, age, description,signo, imageUri}:Guest) => {
+        try {
+            // Recuperar los datos existentes desde AsyncStorage
+            const currentSavedUser = await AsyncStorage.getItem(MY_USER_LOCAL_KEY);
+            let currentSavedUserParsed;
+
+            // Intentar parsear los datos recuperados, y manejar cualquier error en el parseo
+            try {
+                currentSavedUserParsed = currentSavedUser ? JSON.parse(currentSavedUser) : [];
+            } catch (error) {
+                console.error("Error parsing data from AsyncStorage:", error);
+                // Inicializar como un arreglo vacío si el parseo falla
                 currentSavedUserParsed = [];
             }
-    
-            // Añadimos el nuevo usuario al arreglo
-            currentSavedUserParsed.push({ name, age, description });
-    
-            // Guardamos el arreglo actualizado en AsyncStorage
+
+            // Asegurar que el valor parseado es un arreglo
+            if (!Array.isArray(currentSavedUserParsed)) {
+                console.error("Expected an array from AsyncStorage, but received:", currentSavedUserParsed);
+                currentSavedUserParsed = []; // Reiniciar a un arreglo vacío si no es un arreglo
+            }
+
+            // Agregar el nuevo usuario al arreglo parseado
+            currentSavedUserParsed.push({ name, age, description, signo, imageUri });
+
+            // Guardar el arreglo actualizado de vuelta en AsyncStorage
             await AsyncStorage.setItem(
-                MY_USER_LOCAL_KEY, 
+                MY_USER_LOCAL_KEY,
                 JSON.stringify(currentSavedUserParsed)
             );
             return Promise.resolve('User guardado Exitosamente');
@@ -35,27 +43,43 @@ const useFriendLocalStorage = () => {
     }
 
     //metodo para obtener info de usuarios
-    const handleGetUsers = async() => {
+    const handleGetUser = async() => {
         try {
-            const users = await AsyncStorage.getItem(MY_USER_LOCAL_KEY);
-
-            if (users!==null) {
+            const user = await AsyncStorage.getItem(MY_USER_LOCAL_KEY);
+            if (user!==null) {
                 //regresame la info parceada
-                const parsedUsers = JSON.parse(users);
-                return Promise.resolve(parsedUsers);
+                const parsedUser = JSON.parse(user);
+                return Promise.resolve(parsedUser);
             }
         } catch (error) {
             return Promise.reject(error)
         }
     }
 
+    //metodo para borrar usuarios
+    const handleDeleteUser = async (nameToDelete: string): Promise<void> => {
+        try {
+            const currentSavedUsers = await AsyncStorage.getItem(MY_USER_LOCAL_KEY);
+            let usersArray: Guest[] = currentSavedUsers ? JSON.parse(currentSavedUsers) : [];
+    
+            // Filtrar el array para eliminar el usuario
+            usersArray = usersArray.filter(user => user.name !== nameToDelete);
+    
+            // Guardar el nuevo array en AsyncStorage
+            await AsyncStorage.setItem(MY_USER_LOCAL_KEY, JSON.stringify(usersArray));
+    
+            return Promise.resolve();
+        } catch (error) {
+            console.error('Error al eliminar el usuario', error);
+            return Promise.reject(error);
+        }
+    };
+
     return{
         onSaveUser: handleSaveUser,
-        onGetUser: handleGetUsers,
+        onGetUser: handleGetUser,
+        onDeleteUser: handleDeleteUser, // Asegúrate de exponer la función
     }
 }
-
-
-
 
 export default useFriendLocalStorage

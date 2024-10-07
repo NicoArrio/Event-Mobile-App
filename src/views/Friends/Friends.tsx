@@ -1,30 +1,62 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView, TextInput, Alert} from "react-native";
 import { Button, Icon, Input } from "@rneui/themed";
 
 import Headers from '../../components/Header/Header'
-import Users from "../../components/Header/FriendsComponents/Users";
+import UsersContent from "../../components/Header/FriendsComponents/UsersContent";
 import AddFriendLocal from "../../components/Header/FriendsComponents/AddFriendLocal";
 import useFriendLocalStorage from "../../hooks/useFriendLocalStorage";
+import useUserCount from '../../hooks/useUserCount'; // Asegúrate de tener la ruta correcta
+
+import { Guest } from "../../types";
+
+const { onDeleteUser } = useFriendLocalStorage();
 
 
 const Friends = () => {
+    //informacion guardada en estados
     const [visible, setIsVisible] = useState<boolean>(false); //cons de estado reactiva, conforme le des click
+    const [user, setUser] = useState<Guest[]>([]) //arreglo de usuarios, primer ciclo: vacio
     const {onGetUser} = useFriendLocalStorage()
+    const userCount = useUserCount(); // Usar el hook para obtener el conteo actual
 
-    const handleModalClose = async (shouldUpdate?: boolean) => { //save and close exitoso del modal y reseteo
+    //mostrar los usuarios cuando este componente de monte
+    const loadUser = async () => {
+        try {
+            const userResponse = await onGetUser(); //trae todo lo guardado en el asyncStorage
+            setUser(userResponse); //guardamos respuesta en setUser
+        } catch (error) {
+            console.error(error)
+        }
+    }
+    //mostrar componente cuando cargue
+    useEffect(()=>{
+        loadUser().catch(null)
+    },[]) 
+
+    
+    //save and close exitoso del modal y reseteo
+    const handleModalClose = async (shouldUpdate?: boolean) => {
         if (shouldUpdate){
-            Alert.alert('Comida guardada exitosamente')//si actualizamos, mostramos una alerta
-            try {
-                const userResponse = await onGetUser() //trae todo lo guardado en el asyncStorage
-                console.log(userResponse)
-            } catch (error) {
-                console.error(error)
-            }
+            Alert.alert('User guardado Exitosamente')//si actualizamos, mostramos una alerta
+            loadUser()
         }
         setIsVisible(false);
     };
 
+
+    // //borrar usuario
+    const deleteUserByName = async (name: string): Promise<void>  => {
+        try {
+            await onDeleteUser(name);
+            console.log('Usuario eliminado');
+            // Luego de eliminar, actualiza la lista de usuarios
+            loadUser(); // Asumiendo que esta función recarga los usuarios desde AsyncStorage
+        } catch (error) {
+            console.error('Error al eliminar usuario:', error);
+        }
+    };
+    //deleteUserByName('margarita'); //DESCOMENTAR Y COMENTAR RAPIDAMENTE
     return(
         <ScrollView> 
             <View style={styles.container}>
@@ -34,10 +66,10 @@ const Friends = () => {
                 {/* COMPONENTE LISTA DE INVITADOS  */}
                 <View style={styles.listContainer}>
                     <View style={styles.leftContainer}>
-                        <Text style={styles.listLegend}>Lista de invitados</Text>
+                        <Text style={styles.listLegend}>Total de invitados</Text>
                     </View>
                     <View style={styles.rightContainer}>
-                        <Text style={styles.counterNum}>15</Text>
+                        <Text style={styles.counterNum}>{userCount}</Text>
                     </View>
                 </View>
 
@@ -69,11 +101,15 @@ const Friends = () => {
                 <AddFriendLocal visible={visible} onClose={handleModalClose}/>
                 
                 {/* COMPONENTE USUARIOS */}
-                <Users/>
+                <View style={styles.contentUsers}>
+                    {user?.map(guest => (<UsersContent key={`my-user-content-${guest.name}`}{...guest}/>))}
+                </View>
+                {/* <UsersContent name={""} age={""} description={""}/> */}
             </View>
         </ScrollView>
     )
 }
+
 
 
 const styles = StyleSheet.create({
@@ -131,6 +167,12 @@ const styles = StyleSheet.create({
     },
     leftAddContainer:{
         flex:1,
+    },
+    //contenido de user
+    contentUsers:{
+        flexDirection: 'row',
+        flexWrap: 'wrap', // Añade esta propiedad para permitir el acomodo tipo matriz
+        justifyContent: 'space-between', // Esto ayuda a mantener el espacio uniforme entre los elementos
     },
     
 })

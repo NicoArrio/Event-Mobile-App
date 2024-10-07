@@ -1,7 +1,7 @@
 import React from "react";
 import { View,Text,StyleSheet,Image,ScrollView} from "react-native";
 
-import CalendarioFechasRestantes from "../../components/Header/NewsComponents/Calendar"
+import CalendarioFechasRestantes from "../../components/Header/NewsComponents/Calendar";
 import CalendarNews from "../../components/Header/NewsComponents/CalendarNews";
 import Header from "../../components/Header/Header";
 

@@ -15,7 +15,7 @@ const CalendarNews = () => {
                     <View style={styles.BubbleContainerImage}>
                         <View style={styles.bubble}>
                             <Image 
-                            source={require('../../images/tequila.jpeg')} 
+                            source={require('../../../images/tequila.jpeg')} 
                             style={styles.bubbleImage}/>
                             <Text style={styles.bubbleText}>Tequila</Text>
                         </View>
@@ -24,7 +24,7 @@ const CalendarNews = () => {
                     <View style={styles.BubbleContainerImage}>
                         <View style={styles.bubble}>
                             <Image 
-                            source={require('../../images/dj.png')} 
+                            source={require('../../../images/dj.png')} 
                             style={styles.bubbleImage}/>
                             <Text style={styles.bubbleText}>Habra DJ!!</Text>
                         </View>
@@ -33,7 +33,7 @@ const CalendarNews = () => {
                     <View style={styles.BubbleContainerImage}>
                         <View style={styles.bubble}>
                             <Image 
-                            source={require('../../images/pizarron.jpg')} 
+                            source={require('../../../images/pizarron.jpg')} 
                             style={styles.bubbleImage}/>
                             <Text style={styles.bubbleText}>Pizarron para firmas</Text>
                         </View>
@@ -42,7 +42,7 @@ const CalendarNews = () => {
                     <View style={styles.BubbleContainerImage}>
                         <View style={styles.bubble}>
                             <Image 
-                            source={require('../../images/pizzaCortada.jpg')} 
+                            source={require('../../../images/pizzaCortada.jpg')} 
                             style={styles.bubbleImage}/>
                             <Text style={styles.bubbleText}>Pizza para el bajon</Text>
                         </View>
