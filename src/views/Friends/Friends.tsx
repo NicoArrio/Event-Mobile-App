@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, ScrollView, TextInput, Alert} from "react-native";
+import { StyleSheet, Text, View, ScrollView, Alert} from "react-native";
 import { Button, Icon, Input } from "@rneui/themed";
 
 import Headers from '../../components/Header/Header'
@@ -17,6 +17,7 @@ const Friends = () => {
     //informacion guardada en estados
     const [visible, setIsVisible] = useState<boolean>(false); //cons de estado reactiva, conforme le des click
     const [user, setUser] = useState<Guest[]>([]) //arreglo de usuarios, primer ciclo: vacio
+    const [search, setSearch] = useState<string>('')
     const {onGetUser} = useFriendLocalStorage()
     const userCount = useUserCount(); // Usar el hook para obtener el conteo actual
 
@@ -42,6 +43,18 @@ const Friends = () => {
             loadUser()
         }
         setIsVisible(false);
+    };
+
+    //buscar por nombre
+    const handSearchPress = async () => {
+        try {
+            const result = await onGetUser() //traemos todos los usuarios
+            setUser(result.filter((item:Guest) => 
+                item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()))) //filtramos, sin importar Mayus
+        } catch (error) {
+            console.log(error)
+            setUser([])//seteame el arreglo, a un arreglo vacio
+        }
     };
 
 
@@ -78,9 +91,17 @@ const Friends = () => {
                     <View style={styles.InputContainer}>
                         <Input 
                             placeholder="buscar..."
-                            leftIcon={{ type: 'add', name: 'search'}}
+                            //leftIcon={{ type: 'add', name: 'search'}}
+                            value={search}
+                            onChangeText={(text: string) => setSearch(text)}
                         />
                     </View>
+                    <Button
+                        icon={<Icon name="search" color="#fff" />}
+                        radius="lg"
+                        color="#141414"
+                        onPress={handSearchPress}
+                    />
                 </View>
 
                 {/* COMPONENTE LOCAL PARA AGREGAR USUARIOS */}
@@ -98,13 +119,12 @@ const Friends = () => {
                     </View>
                 </View>
 
-                <AddFriendLocal visible={visible} onClose={handleModalClose}/>
-                
                 {/* COMPONENTE USUARIOS */}
                 <View style={styles.contentUsers}>
                     {user?.map(guest => (<UsersContent key={`my-user-content-${guest.name}`}{...guest}/>))}
                 </View>
-                {/* <UsersContent name={""} age={""} description={""}/> */}
+
+                <AddFriendLocal visible={visible} onClose={handleModalClose}/>
             </View>
         </ScrollView>
     )
@@ -125,8 +145,6 @@ const styles = StyleSheet.create({
     },
     leftContainer:{
         flex:1,
-        justifyContent:'center',
-
     },
     listLegend:{
         color:'#ffff',
@@ -170,6 +188,7 @@ const styles = StyleSheet.create({
     },
     //contenido de user
     contentUsers:{
+        flex:1,
         flexDirection: 'row',
         flexWrap: 'wrap', // Añade esta propiedad para permitir el acomodo tipo matriz
         justifyContent: 'space-between', // Esto ayuda a mantener el espacio uniforme entre los elementos
