@@ -69,7 +69,7 @@ const Friends = () => {
             console.error('Error al eliminar usuario:', error);
         }
     };
-    //deleteUserByName('margarita'); //DESCOMENTAR Y COMENTAR RAPIDAMENTE
+    //deleteUserByName('fr'); //DESCOMENTAR Y COMENTAR RAPIDAMENTE
     return(
         <ScrollView> 
             <View style={styles.container}>
