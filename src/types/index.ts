@@ -5,3 +5,8 @@ export type Guest= {
     signo: string;
     imageUri?: string; // Campo opcional para la URL de la imagen
 };
+
+export type RootStackParamList = {
+    Login: undefined;
+    Register: undefined;
+  };
