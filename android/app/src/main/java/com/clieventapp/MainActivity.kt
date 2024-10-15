@@ -11,9 +11,9 @@ class MainActivity : ReactActivity() {
 
   //splash screen version kotlin (not java)
   override fun onCreate(savedInstanceState: Bundle?) {
-      super.onCreate(savedInstanceState)
+      super.onCreate(null)
       SplashScreen.show(this)  // Muestra la pantalla de inicio al crear la actividad
-}
+  }
 
   /**
    * Returns the name of the main component registered from JavaScript. This is used to schedule

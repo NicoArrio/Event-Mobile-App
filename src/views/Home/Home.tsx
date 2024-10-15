@@ -3,8 +3,8 @@ import { View} from 'react-native';
 
 import News from "../News";
 import Friends from '../Friends';
-import Login from "../Login";
-import Register from "../Register";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
 
 const Home = () => {
     return (

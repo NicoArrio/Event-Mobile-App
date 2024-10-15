@@ -3,10 +3,13 @@ import {SafeAreaProvider} from 'react-native-safe-area-context'
 import { Platform, StyleSheet } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import Home from './src/views/Home';
 import Routes from './src/routes';
-import Login from './src/views/Login';
-import Register from './src/views/Register';
+import Login from './src/views/Login/Login';
+import Register from './src/views/Register/Register';
 
 
 function App(): React.JSX.Element {
@@ -16,10 +19,17 @@ function App(): React.JSX.Element {
     SplashScreen.hide();
   },[])
   
+  const Stack = createNativeStackNavigator();
+
   return (
-    <SafeAreaProvider style={styles.container}>
-      <Home/>
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName='Login'
+      >
+        <Stack.Screen name='Login' component={Login}/>
+        <Stack.Screen name='Register' component={Register}/> 
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
