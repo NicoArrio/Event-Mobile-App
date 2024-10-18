@@ -8,21 +8,20 @@ import BigHeader from '../../components/Header/BigHeader';
 import { Button } from 'react-native-elements';
 import { RootStackParamList } from '../../types';
 
-function Login () {
+function Login (props) {
   return (
       <View style={styles.container}>
         <BigHeader/>
 
-        <Text style={styles.LoginLegend}>Login</Text>
+        <Text style={styles.LoginLegend}>Loginnn</Text>
         
-
         <Text style={styles.signUpText}>
           Don’t have an account? <Text style={{fontWeight: 'bold', color:'red'}}>Sign Up</Text>
         </Text>
 
         <Button 
           title='Register'     
-          // onPress={handlePressRegister}
+          onPress={() => props.navigation.navigate("Register")}
         />
         
       </View>

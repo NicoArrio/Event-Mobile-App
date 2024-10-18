@@ -10,6 +10,8 @@ import Home from './src/views/Home';
 import Routes from './src/routes';
 import Login from './src/views/Login/Login';
 import Register from './src/views/Register/Register';
+import News from './src/views/News';
+import Friends from './src/views/Friends';
 
 
 function App(): React.JSX.Element {
