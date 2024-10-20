@@ -14,11 +14,14 @@ const BigHeader = () => {
 
 const styles = StyleSheet.create({
     logoContainer: {
-        marginBottom: 30,
+        //marginBottom: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     logo: {
-        width: 200,
-        height: 200, // Ajusta las dimensiones según el logo que uses
+        width: 260,
+        height: 260, // Ajusta las dimensiones según el logo que uses
+        marginTop: 30,
     },
 })
 

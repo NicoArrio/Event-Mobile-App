@@ -2,9 +2,12 @@ import React, { useEffect } from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context'
 import { Platform, StyleSheet } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Home from './src/views/Home';
 import Routes from './src/routes';
@@ -21,16 +24,61 @@ function App(): React.JSX.Element {
     SplashScreen.hide();
   },[])
   
-  const Stack = createNativeStackNavigator();
+  const TabNav = createBottomTabNavigator();
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName='Login'
+      <TabNav.Navigator
+        screenOptions={{
+          tabBarActiveTintColor:'red',
+          tabBarInactiveTintColor:'black',
+          
+          tabBarLabelStyle:{
+            fontSize:12,
+            paddingBottom:4,
+            fontWeight:600,
+            
+          }
+        }}
       >
-        <Stack.Screen name='Login' component={Login}/>
-        <Stack.Screen name='Register' component={Register}/> 
-      </Stack.Navigator>
+        <TabNav.Screen name='Novedades' component={News} 
+        options={{
+          tabBarIcon:({focused})=>(
+            <Icon name='calendar-alt' size={23} color={focused ? 'red' : 'black'}/>
+          ),
+        headerShown:false
+        }}
+        />
+
+        <TabNav.Screen name='Invitados' component={Friends} 
+        options={{
+          tabBarIcon:({focused})=>(
+            <Icon name='users' size={23} color={focused ? 'red' : 'black'}/>
+          ),
+        headerShown:false
+        }}
+        />
+
+        <TabNav.Screen name='login' component={Login} 
+        options={{
+          tabBarIcon:({focused})=>(
+            <Icon name='glass-cheers' size={23} color={focused ? 'red' : 'black'}/>
+          ),
+        headerShown:false
+        }}
+        />
+
+        <TabNav.Screen name='register' component={Register} 
+        options={{
+          tabBarIcon:({focused})=>(
+            <Icon name='user-alt' size={23} color={focused ? 'red' : 'black'}/>
+          ),
+        headerShown:false
+        }}
+        />
+        
+        
+      </TabNav.Navigator>
     </NavigationContainer>
   );
 }

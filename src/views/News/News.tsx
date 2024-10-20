@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
     container: {
         padding: 12,
         flex:1,
+        backgroundColor: '#141414',
     },
     paragraph: {
         fontFamily: 'RobotoMono-Regular', // Asegúrate de usar el nombre exacto del archivo de fuente
