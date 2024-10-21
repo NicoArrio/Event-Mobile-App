@@ -27,6 +27,8 @@ function App(): React.JSX.Element {
   const TabNav = createBottomTabNavigator();
 
   return (
+
+    // B U T T O N   N A V I G A T I O N
     <NavigationContainer>
       <TabNav.Navigator
         screenOptions={{
