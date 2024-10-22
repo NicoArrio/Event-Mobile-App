@@ -129,7 +129,7 @@ const addFriendLocal: FC<AddFriendModalProps> = ({ onClose, visible }) => {
                             color="#4ecb71"
                             onPress={handAddPress}
                             disabled={
-                                name.trim()===''||age.trim()===''||description.trim()===''
+                                name.trim()===''||age.trim()===''||description.trim()===''||signo.trim()===''
                             }
                         />
                     </View>

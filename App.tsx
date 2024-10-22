@@ -24,64 +24,73 @@ function App(): React.JSX.Element {
     SplashScreen.hide();
   },[])
   
-  const TabNav = createBottomTabNavigator();
-
+  // BUTTON NAVIGATION
+  // const TabNav = createBottomTabNavigator();
+  const Stack = createNativeStackNavigator();
   return (
-
-    // B U T T O N   N A V I G A T I O N
     <NavigationContainer>
-      <TabNav.Navigator
-        screenOptions={{
-          tabBarActiveTintColor:'red',
-          tabBarInactiveTintColor:'black',
-          
-          tabBarLabelStyle:{
-            fontSize:12,
-            paddingBottom:4,
-            fontWeight:600,
-            
-          }
-        }}
+      <Stack.Navigator
+        screenOptions={{headerShown:false}}
       >
-        <TabNav.Screen name='Novedades' component={News} 
-        options={{
-          tabBarIcon:({focused})=>(
-            <Icon name='calendar-alt' size={23} color={focused ? 'red' : 'black'}/>
-          ),
-        headerShown:false
-        }}
-        />
-
-        <TabNav.Screen name='Invitados' component={Friends} 
-        options={{
-          tabBarIcon:({focused})=>(
-            <Icon name='users' size={23} color={focused ? 'red' : 'black'}/>
-          ),
-        headerShown:false
-        }}
-        />
-
-        <TabNav.Screen name='login' component={Login} 
-        options={{
-          tabBarIcon:({focused})=>(
-            <Icon name='glass-cheers' size={23} color={focused ? 'red' : 'black'}/>
-          ),
-        headerShown:false
-        }}
-        />
-
-        <TabNav.Screen name='register' component={Register} 
-        options={{
-          tabBarIcon:({focused})=>(
-            <Icon name='user-alt' size={23} color={focused ? 'red' : 'black'}/>
-          ),
-        headerShown:false
-        }}
-        />
-        
-        
-      </TabNav.Navigator>
+        <Stack.Screen name='Login' component={Login}/>
+        <Stack.Screen name='Register' component={Register}/>
+      </Stack.Navigator>
     </NavigationContainer>
+    
+    // // B U T T O N   N A V I G A T I O N
+    // <NavigationContainer>
+    //   <TabNav.Navigator
+    //     screenOptions={{
+    //       tabBarActiveTintColor:'red',
+    //       tabBarInactiveTintColor:'black',
+          
+    //       tabBarLabelStyle:{
+    //         fontSize:12,
+    //         paddingBottom:4,
+    //         fontWeight:600,
+            
+    //       }
+    //     }}
+    //   >
+    //     <TabNav.Screen name='Novedades' component={News} 
+    //     options={{
+    //       tabBarIcon:({focused})=>(
+    //         <Icon name='calendar-alt' size={23} color={focused ? 'red' : 'black'}/>
+    //       ),
+    //     headerShown:false
+    //     }}
+    //     />
+
+    //     <TabNav.Screen name='Invitados' component={Friends} 
+    //     options={{
+    //       tabBarIcon:({focused})=>(
+    //         <Icon name='users' size={23} color={focused ? 'red' : 'black'}/>
+    //       ),
+    //     headerShown:false
+    //     }}
+    //     />
+
+    //     <TabNav.Screen name='login' component={Login} 
+    //     options={{
+    //       tabBarIcon:({focused})=>(
+    //         <Icon name='glass-cheers' size={23} color={focused ? 'red' : 'black'}/>
+    //       ),
+    //     headerShown:false
+    //     }}
+    //     />
+
+    //     <TabNav.Screen name='register' component={Register} 
+    //     options={{
+    //       tabBarIcon:({focused})=>(
+    //         <Icon name='user-alt' size={23} color={focused ? 'red' : 'black'}/>
+    //       ),
+    //     headerShown:false
+    //     }}
+    //     />
+        
+        
+    //   </TabNav.Navigator>
+    // </NavigationContainer>
   );
 }
 

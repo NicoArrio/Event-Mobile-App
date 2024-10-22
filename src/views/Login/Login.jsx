@@ -143,7 +143,8 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     marginTop: -12,
-    fontFamily:'RobotoMono-Regular'
+    fontFamily:'RobotoMono-Regular',
+    color: '#ffffff',
   },
   button: {
     alignItems: 'center',
