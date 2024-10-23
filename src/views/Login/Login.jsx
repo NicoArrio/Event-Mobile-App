@@ -32,7 +32,7 @@ function Login (props) {
 
         {/* I N P U T    D A T O S */}
         <View style={styles.action}>
-          <FontAwesome name="user-o" color="#C21807" style={styles.smallIcon}
+          <FontAwesome name="envelope" color="#C21807" style={styles.smallIcon}
           />
           <TextInput
             placeholder="Email"

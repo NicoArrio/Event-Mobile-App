@@ -58,7 +58,7 @@ function Register (props) {
       const passwordVar = e.nativeEvent.text;
       setPassword(passwordVar);
       setPasswordVerify(false);
-      if (/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(passwordVar)) {
+      if (/^(?=.*\d)[a-zA-Z\d]{6,}$/.test(passwordVar)) {
         setPassword(passwordVar);
         setPasswordVerify(true);
       }
@@ -74,7 +74,7 @@ function Register (props) {
 
         {/* E M A I L*/}
         <View style={styles.action}>
-          <FontAwesome name="user-o" color="#C21807" style={styles.smallIcon}/>
+          <FontAwesome name="envelope" color="#C21807" style={styles.smallIcon}/>
           <TextInput
             placeholder="Email"
             placeholderTextColor="#ffff" 
