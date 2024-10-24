@@ -16,8 +16,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import {useEffect, useState} from 'react';
 import {log} from 'react-native-reanimated';
+import axios from 'axios';
 
-//import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import BigHeader from '../../components/Header/BigHeader';
@@ -32,6 +32,20 @@ function Register (props) {
     const [password,setPassword] = useState('');
     const [passwordVerify,setPasswordVerify] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [secretText, setSecretText] = useState('');
+
+    function handleSubmit(){
+      const userData = {
+        email,
+        mobile,
+        password,
+      };
+
+      axios
+        .post('http://181.85.32.40:3000/register',userData)
+        .then(res=>console.log(res.data))
+        .catch(e => console.log(e));
+    }
 
     function handleEmail(e) {
       const emailVar = e.nativeEvent.text;
@@ -127,14 +141,14 @@ function Register (props) {
             placeholderTextColor="#ffff" 
             style={styles.textInput}
             onChange={e => handlePassword(e)}
-            secureTextEntry={showPassword}
+            secureTextEntry={!showPassword}
           />
-          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+          <TouchableOpacity onPress={() => setShowPassword(prevState => !prevState)}>
             {password && (
 			        !showPassword ? (
 				        <Feather
                   name="eye-off"
-                  style={{marginRight: -10}}
+                  style={{marginRight: -10, }}
                   color={passwordVerify ? 'green' : 'red'}
                   size={23}
                 />
@@ -164,16 +178,14 @@ function Register (props) {
       {/* B U T T O N s*/}
       <View style={styles.button}>
 
-        {/* L O G I N */}
-        <TouchableOpacity style={styles.inBut} onPress={() => handleSubmit()}>
+        {/* R E G I S T E R */}
+        <TouchableOpacity style={styles.inBut} onPress={()=>handleSubmit()}>
           <View>
-            <Text 
-            style={styles.textSign}
-            onPress={()=>navigation.navigate('Login')}
-            >Register</Text>
+            <Text style={styles.textSign}>Register</Text>
           </View>
         </TouchableOpacity>
-
+        
+        {/*B A C K   T O   L O G I N */}
         <Text style={styles.signUpText}>
           Already have an account 
           <Text 
