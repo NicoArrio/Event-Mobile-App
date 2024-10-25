@@ -16,7 +16,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import {useEffect, useState} from 'react';
 import {log} from 'react-native-reanimated';
-//import axios from 'axios';
+import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import BigHeader from '../../components/Header/BigHeader';
@@ -24,13 +24,37 @@ import BigHeader from '../../components/Header/BigHeader';
 
 function Login (props) {
   const navigation=useNavigation();
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+
+  function handleSubmit(){
+    console.log(email,password);
+    const UserData={
+      email:email,
+      password
+    };
+    
+    axios
+      .post('http://10.0.2.2:3000/login', UserData)
+      .then(res=> {
+        console.log(res.data)
+        if (res.data.status== 'ok'){
+          Alert.alert('Logged in Succesfull');
+          navigation.navigate('News');
+        }
+      });
+
+  }
+
   return (
-    <View style={{backgroundColor: '#141414', flex:1}} >
+    <View style={{backgroundColor: '#141414', flex:1}} keyboardShouldPersistTaps={'always'}>
       <BigHeader/>
       <View style={styles.loginContainer}>
         <Text style={styles.text_header}>Login</Text>
 
-        {/* I N P U T    D A T O S */}
+        {/* I N P U T S*/}
+
+        {/* E M A I L*/}
         <View style={styles.action}>
           <FontAwesome name="envelope" color="#C21807" style={styles.smallIcon}
           />
@@ -42,6 +66,7 @@ function Login (props) {
           />
         </View>
 
+        {/* P A S S W O R D */}
         <View style={styles.action}>
           <FontAwesome name="lock" color="#C21807" style={styles.smallIcon} />
           <TextInput
@@ -70,7 +95,7 @@ function Login (props) {
       {/* B U T T O N s*/}
       <View style={styles.button}>
 
-        {/* L O G I N */}
+        {/* L O G I N   I N */}
         <TouchableOpacity style={styles.inBut} onPress={() => handleSubmit()}>
           <View>
             <Text style={styles.textSign}>Log in</Text>
@@ -83,7 +108,7 @@ function Login (props) {
           </Text>
         </View>
 
-        {/* G O O G L E */}
+        {/* L O G I N   I N   G O O G L E */}
         <TouchableOpacity style={styles.inBut} onPress={() => alert('Coming Soon')}>
           
           <View style={styles.googleContainer}>
@@ -102,9 +127,14 @@ function Login (props) {
         <Text style={styles.signUpText}>
           Don’t have an account?
           <Text 
-            style={{fontWeight: 'bold', color:'red'}}
+            style={{
+              fontFamily:'RobotoMono-Medium',
+              fontSize:17,
+              textDecorationLine: 'underline', 
+              color: 'red',
+            }}
             onPress={()=>navigation.navigate('Register')}
-          > Sign Up</Text>
+          >Sign Up</Text>
         </Text>
 
       </View>

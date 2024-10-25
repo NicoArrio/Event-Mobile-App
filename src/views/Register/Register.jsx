@@ -40,11 +40,22 @@ function Register (props) {
         mobile,
         password,
       };
-
-      axios
-        .post('http://181.85.32.40:3000/register',userData)
-        .then(res=>console.log(res.data))
-        .catch(e => console.log(e));
+      if (emailVerify && passwordVerify && mobileVerify) {
+        axios
+          .post('http://10.0.2.2:3000/register', userData)
+          .then(res => {
+            console.log(res.data);
+            if (res.data.status == 'ok') {
+              Alert.alert('Registered Successfull!!');
+            } else {
+              Alert.alert(JSON.stringify(res.data.data));
+            }
+          })
+          .catch(e => console.log(e));
+      }
+      else{
+        Alert.alert("fill in all the blanks")
+      }
     }
 
     function handleEmail(e) {
@@ -186,12 +197,15 @@ function Register (props) {
         </TouchableOpacity>
         
         {/*B A C K   T O   L O G I N */}
-        <Text style={styles.signUpText}>
-          Already have an account 
-          <Text 
-            style={{fontWeight: 'bold', color:'red'}}
+        <Text style={styles.signUpText}>Already have an account?<Text 
+            style={{
+              fontFamily:'RobotoMono-Medium',
+              fontSize:17,
+              textDecorationLine: 'underline', 
+              color: 'red',
+            }}
             onPress={()=>navigation.navigate('Login')}
-            > Login</Text>
+            >Login</Text>
         </Text>
 
       </View>
@@ -277,6 +291,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         marginTop: 20,
         fontFamily: 'RobotoMono-Regular',
+        
     },
 });
 

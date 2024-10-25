@@ -34,6 +34,7 @@ function App(): React.JSX.Element {
       >
         <Stack.Screen name='Login' component={Login}/>
         <Stack.Screen name='Register' component={Register}/>
+        <Stack.Screen name='News' component={News}/>
       </Stack.Navigator>
     </NavigationContainer>
     
