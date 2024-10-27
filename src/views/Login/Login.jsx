@@ -31,18 +31,24 @@ function Login (props) {
     console.log(email,password);
     const UserData={
       email:email,
-      password
+      password,
     };
-    
     axios
       .post('http://10.0.2.2:3000/login', UserData)
       .then(res=> {
-        console.log(res.data)
+        console.log(res.data);
         if (res.data.status== 'ok'){
-          Alert.alert('Logged in Succesfull');
-          navigation.navigate('News');
+          //Alert.alert('Logged in Succesfull');
+          AsyncStorage.setItem('token', res.data.data);
+          navigation.navigate('HomeNews');
         }
+      })
+      .catch(error => {
+        console.error("Login Error:", error);
+        Alert.alert("Login Error", "Failed to connect to the server.");
       });
+      ;
+      
 
   }
 

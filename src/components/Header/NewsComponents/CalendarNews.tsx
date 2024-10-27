@@ -55,7 +55,6 @@ const CalendarNews = () => {
 
 const styles = StyleSheet.create({
     newsTextContainer:{
-        marginTop: 20, // Espacio superior para separar de la descripción
         alignItems: 'flex-end',
     },
     newsText:{

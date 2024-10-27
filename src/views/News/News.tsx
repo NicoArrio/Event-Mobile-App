@@ -1,18 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View,Text,StyleSheet,Image,ScrollView} from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "axios";
+
+import {useNavigation} from '@react-navigation/native';
 
 import CalendarioFechasRestantes from "../../components/Header/NewsComponents/Calendar";
 import CalendarNews from "../../components/Header/NewsComponents/CalendarNews";
+import InfoEvent from "../../components/Header/NewsComponents/InfoEvent";
+
 import Header from "../../components/Header/Header";
 
 
-const News = () => {
+function News() {
+    const navigation = useNavigation();
+
+    async function getData(){
+        const token = await AsyncStorage.getItem('token');
+        console.log(token);
+        axios
+            .post('http://10.0.2.2:3000/userdata',{token:token})
+            .then(res => console.log(res.data));
+    }
+    useEffect(() => {
+        getData()
+    },[]);
+
     return(
-        <ScrollView> 
-            <View style={styles.container}>
+        <ScrollView style={styles.container}> 
 
                 {/* COMPONENTE HEADER  */}
                 <Header/>
+
+                {/* COMPONENTE NOVEDADES  */}
+                <View>
+                    <CalendarNews/>
+                </View>
 
                 {/* COMPONENTE IMAGEN  */}
                 <View style={styles.ImageContainer}>
@@ -22,44 +45,16 @@ const News = () => {
                 </View>
 
                 {/* COMPONENTE TEXTO  */}
-                <View style={styles.TitleTextContainer}>
-                    <Text style={styles.TitleText}>Cumple Nico </Text>
-                </View>
                 <View>
-                    <Text style={styles.Text}>
-                    <Text>
-                        Me complace invitarlos a celebrar como me hago cada vez más viejo! 
-                        Todos los años siempre me peleaba con el excel para administrar y 
-                        organizar este evento, por eso este año decidí crear una </Text>
-                    <Text style={styles.highlighted}>app que se encargará de todo.</Text>
-                    {"\n\n"}
-                    <Text>
-                        Para que todos podamos disfrutar al máximo, nuestro anfitrión se 
-                        encargará de adquirir todas las bebidas necesarias para la ocasión, 
-                        así que ustedes solo tendrán que </Text>
-                        <Text style={styles.highlighted}>contribuir con el monto especificado 
-                        </Text>
-                        <Text> previamente para cubrir los gastos.</Text>
-                    {"\n\n"}
-                    <Text>
-                        Confirmen su asistencia lo antes posible para que podamos organizar 
-                        todo de la mejor manera.</Text>
-                    <Text style={styles.highlighted}>El sábado 21 de diciembre </Text>
-                    <Text>se realizara el evento, la dirección es </Text>
-                    <Text style={styles.highlighted}>Seguí 1414.</Text>
-                    </Text>
+                    <InfoEvent/>
                 </View>
                 
-                {/* COMPONENTE NOVEDADES  */}
-                <View>
-                    <CalendarNews/>
-                </View>
                 
                 {/* COMPONENTE CALENDARIO  */}
                 <View>
                     <CalendarioFechasRestantes/>
                 </View>
-            </View>
+            
         </ScrollView>
     )
 }
@@ -106,4 +101,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default News
+export default News;

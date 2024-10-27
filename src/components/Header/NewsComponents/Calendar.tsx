@@ -73,6 +73,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
+        marginTop: 70, // Espacio superior para separar de la descripción
+        
+        
     },
     calendarHeaderContainer: {
         marginTop: -50,
@@ -101,6 +104,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#141414',
         padding: 5,
+        marginBottom: 20, // Aumenta este valor según necesites más espacio
     },
     countdownValue: {
         fontSize: 20,
