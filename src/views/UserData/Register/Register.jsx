@@ -19,8 +19,7 @@ import {log} from 'react-native-reanimated';
 import axios from 'axios';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-import BigHeader from '../../components/Header/BigHeader';
+import BigHeader from '../../../components/Header/BigHeader';
 
 
 function Register (props) {
@@ -90,7 +89,7 @@ function Register (props) {
     }
 
     return (
-      <View style={{backgroundColor: '#141414', flex:1}} keyboardShouldPersistTaps={'always'}>
+    <View style={{backgroundColor: '#141414', flex:1}} keyboardShouldPersistTaps={'always'}>
       <BigHeader/>
       <View style={styles.loginContainer}>
         <Text style={styles.text_header}>Register</Text>

@@ -11,7 +11,7 @@ const {
 } = require('react-native');
 import { useNavigation } from '@react-navigation/native';
 import { Button } from 'react-native-elements';
-import { RootStackParamList } from '../../types';
+import { RootStackParamList } from '../../../types';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import {useEffect, useState} from 'react';
@@ -19,7 +19,7 @@ import {log} from 'react-native-reanimated';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import BigHeader from '../../components/Header/BigHeader';
+import BigHeader from '../../../components/Header/BigHeader';
 
 
 function Login (props) {
@@ -41,6 +41,11 @@ function Login (props) {
           //Alert.alert('Logged in Succesfull');
           AsyncStorage.setItem('token', res.data.data);
           navigation.navigate('HomeNews');
+          // if (res.data.isFirstLogin) {
+          //   navigation.navigate('Choice');
+          // } else {
+          //   navigation.navigate('HomeNews');
+          // }
         }
       })
       .catch(error => {
