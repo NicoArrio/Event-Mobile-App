@@ -20,6 +20,7 @@
     "@rneui/base": "^4.0.0-rc.7",
     "@rneui/themed": "^4.0.0-rc.8",
     "axios": "^1.7.7",
+    "jwt-decode": "^4.0.0",
     "react": "18.2.0",
     "react-native": "0.74.3",
     "react-native-calendars": "^1.1307.0",

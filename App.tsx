@@ -1,6 +1,5 @@
 //librerias
 import React, { useEffect, useState } from 'react';
-import {SafeAreaProvider} from 'react-native-safe-area-context'
 import { Platform, StyleSheet } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/FontAwesome5'
@@ -8,9 +7,13 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { RootStackParamList } from './src/types/index'; 
 //Pantallas
 import Login from './src/views/UserData/Login/Login';
 import Register from './src/views/UserData/Register/Register';
+import Choice from './src/views/UserData/Choice/Choice';
+import UserData from './src/views/UserData/UserData/UserData';
+import PlusInformation from './src/views/UserData/PlusInformation/PlusInformation';
 import News from './src/views/News';
 import Friends from './src/views/Friends';
 import Statistics from './src/views/Statistics';
@@ -25,7 +28,7 @@ function App(): React.JSX.Element {
   },[])
   
   const TabNav = createBottomTabNavigator();
-  const Stack = createNativeStackNavigator();
+  const Stack = createNativeStackNavigator<RootStackParamList>();
 
   const TabNavigator = () => (
     <TabNav.Navigator
@@ -71,8 +74,9 @@ function App(): React.JSX.Element {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Register" component={Register} />
-        {/* <Stack.Screen name="Choice" component={Choice} />
-        <Stack.Screen name="OnlyHost" component={OnlyHost} /> */}
+        <Stack.Screen name="Choice" component={Choice} />
+        <Stack.Screen name="UserData" component={UserData} />
+        <Stack.Screen name="PlusInformation" component={PlusInformation}/>
         <Stack.Screen name="HomeNews" component={TabNavigator}/>
       </Stack.Navigator>
     </NavigationContainer>

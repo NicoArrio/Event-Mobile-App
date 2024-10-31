@@ -2,20 +2,15 @@ import React from 'react';
 const {
   View,
   Text,
-  Image,
   TextInput,
   TouchableOpacity,
-  ScrollView,
   Alert,
   StyleSheet
 } = require('react-native');
 import { useNavigation } from '@react-navigation/native';
-import { Button } from 'react-native-elements';
-import { RootStackParamList } from '../../../types';
+
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Feather from 'react-native-vector-icons/Feather';
-import {useEffect, useState} from 'react';
-import {log} from 'react-native-reanimated';
+import {useState} from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -23,7 +18,7 @@ import BigHeader from '../../../components/Header/BigHeader';
 
 
 function Login (props) {
-  const navigation=useNavigation();
+  const navigation = useNavigation();
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
 
@@ -40,12 +35,11 @@ function Login (props) {
         if (res.data.status== 'ok'){
           //Alert.alert('Logged in Succesfull');
           AsyncStorage.setItem('token', res.data.data);
-          navigation.navigate('HomeNews');
-          // if (res.data.isFirstLogin) {
-          //   navigation.navigate('Choice');
-          // } else {
-          //   navigation.navigate('HomeNews');
-          // }
+          if (res.data.isFirstLogin) {
+            navigation.navigate('Choice');
+          } else {
+            navigation.navigate('HomeNews');
+          }
         }
       })
       .catch(error => {
@@ -120,7 +114,7 @@ function Login (props) {
         </View>
 
         {/* L O G I N   I N   G O O G L E */}
-        <TouchableOpacity style={styles.inBut} onPress={() => alert('Coming Soon')}>
+        <TouchableOpacity style={styles.inBut} onPress={() => Alert('Coming Soon')}>
           
           <View style={styles.googleContainer}>
             <View style={styles.leftGoogleContainer}>

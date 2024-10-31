@@ -37,19 +37,19 @@ const addFriendLocal: FC<AddFriendModalProps> = ({ onClose, visible }) => {
                 signo,
                 imageUri,
             })
-            onClose(true); //actualiza y trae todos los elementos
+            onClose(true); 
         } catch (error) {
-            console.log(error) //reject??
+            console.log(error) 
         }
         
     }
 
     const handleChoosePhoto = () => {
         const options = {
-            mediaType: 'photo' as const, // Corrección aquí usando 'as const'
+            mediaType: 'photo' as const, 
         };
         launchImageLibrary(options, response => {
-            if (response.assets && response.assets[0].uri) { // Ajustado para acceder correctamente a la URI
+            if (response.assets && response.assets[0].uri) { 
                 setImageUri(response.assets[0].uri);
             }
         });

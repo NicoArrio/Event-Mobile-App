@@ -15,14 +15,13 @@ import { RootStackParamList } from '../../types';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import {useEffect, useState} from 'react';
-import {log} from 'react-native-reanimated';
 import axios from 'axios';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import BigHeader from '../../../components/Header/BigHeader';
 
 
-function Register (props) {
+function Register () {
     const navigation=useNavigation();
     const [email,setEmail] = useState('');
     const [emailVerify,setEmailVerify] = useState(false);
@@ -32,6 +31,7 @@ function Register (props) {
     const [passwordVerify,setPasswordVerify] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [secretText, setSecretText] = useState('');
+    
 
     function handleSubmit(){
       const userData = {

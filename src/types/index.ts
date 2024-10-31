@@ -1,12 +1,13 @@
 export type RootStackParamList = {
     Login: undefined;
     Register: undefined;
+    Choice: undefined;
+    UserData: undefined;
+    PlusInformation: undefined;
+    HomeNews: undefined;
 };
 
-export type RootStackParamListDos = {
-    LoginDos: undefined;
-    RegisterDos: undefined;
-};
+
 
 export type Guest= {
     name: string;
