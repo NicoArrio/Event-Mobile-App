@@ -10,6 +10,7 @@ const {
 import { useNavigation } from '@react-navigation/native';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
 import {useState} from 'react';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -21,9 +22,10 @@ function Login (props) {
   const navigation = useNavigation();
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   function handleSubmit(){
-    console.log(email,password);
+    //console.log(email,password);
     const UserData={
       email:email,
       password,
@@ -79,7 +81,11 @@ function Login (props) {
             placeholderTextColor="#ffff" 
             style={styles.textInput}
             onChange={e => setPassword(e.nativeEvent.text)}
+            secureTextEntry={!showPassword}
           />
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+            <Feather name={showPassword ? 'eye' : 'eye-off'} color="#C21807" size={20} />
+          </TouchableOpacity>
         </View>
 
         {/* F O R G E T    P A S S W O R D */}

@@ -83,7 +83,7 @@ function UserData () {
         const ageNumber = parseInt(age);
 
         // Validación del nombre
-        if (!name || !/^[a-zA-Z ]+$/.test(name) || name.length > 15) {
+        if (!name || !/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+$/.test(name.trim()) || name.trim().length > 15) {
             setNameError('Only letters, max 15 characters');
             valid = false;
         } else {
@@ -91,7 +91,7 @@ function UserData () {
         }
     
         // Validación del apellido
-        if (!lastName || !/^[a-zA-Z ]+$/.test(lastName) || lastName.length > 15) {
+        if (!lastName || !/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+$/.test(lastName.trim()) || lastName.trim().length > 15) {
             setLastNameError('Only letters and max 15 characters');
             valid = false;
         } else {
@@ -115,7 +115,7 @@ function UserData () {
         }
     
         // Validación del signo
-        if (!sign || !/^[a-zA-Z ]+$/.test(sign)|| sign.length > 11) {
+        if (!sign || !/^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ ]+$/.test(sign.trim()) || sign.trim().length > 11) {
             setSignError('Only letters and Max 11 characters');
             valid = false;
         } else {
@@ -265,6 +265,7 @@ function UserData () {
                     placeholderTextColor="#7B7B7B" 
                 />
                 <Text style={styles.errorText}>{jobError}</Text>
+                
                 {/* B U T T O N    S A V E D */}
                 <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
                     <Text style={styles.saveButtonText}>Save</Text>

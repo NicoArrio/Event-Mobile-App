@@ -83,10 +83,6 @@ function App(): React.JSX.Element {
   );
 }
 
-const styles = StyleSheet.create({
-  container:{
-    backgroundColor: '#141414' //333333
-  }
-})
+
 
 export default App;

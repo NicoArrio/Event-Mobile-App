@@ -2,22 +2,17 @@ import React from 'react';
 const {
   View,
   Text,
-  Image,
   TextInput,
   TouchableOpacity,
-  ScrollView,
   Alert,
   StyleSheet
 } = require('react-native');
 import { useNavigation } from '@react-navigation/native';
-import { Button } from 'react-native-elements';
-import { RootStackParamList } from '../../types';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import axios from 'axios';
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import BigHeader from '../../../components/Header/BigHeader';
 
 
@@ -30,7 +25,6 @@ function Register () {
     const [password,setPassword] = useState('');
     const [passwordVerify,setPasswordVerify] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
-    const [secretText, setSecretText] = useState('');
     
 
     function handleSubmit(){

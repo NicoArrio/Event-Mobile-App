@@ -1,29 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert, Image } from 'react-native';
-// import { View, Text, TouchableOpacity, StyleSheet, Alert, Image,ImageBackground  } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from 'jwt-decode';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 
 function Choice() {
     const navigation = useNavigation();
+    const [guest, setGuest] = useState('');
 
     const handleChoice = async (choice) => {
+        console.log("Guest choice made:", choice); // Confirmación del valor seleccionado
+        setGuest(choice);
+    
         if (choice === 'anfitrion') {
             Alert.alert("Acceso Denegado", "Uso Exclusivo para Anfitriones");
-            return; // Detiene la ejecución adicional para no redirigir
+            return;
         }
-
+    
         try {
             const token = await AsyncStorage.getItem('token');
+            console.log("Retrieved token:", token); // Confirmar si el token existe y es correcto
+            if (!token) {
+                Alert.alert("Error", "Session not valid.");
+                return;
+            }
+    
+            await AsyncStorage.setItem('guest', choice);
+    
             const decoded = jwtDecode(token);
             const email = decoded.email;
-
+    
+            console.log("Sending to backend:", { choice, guest: choice }); // Confirmación antes del envío al backend
+            console.log("Email:", email); // Verificar email decodificado
+    
+            const response = await axios.post('http://10.0.2.2:3000/updateChoiceData', {
+                token,
+                choiceData: { guest: choice, choice }
+            });
+            console.log("Response from updateChoiceData:", response.data); // Confirmación de la respuesta del backend
+    
             await axios.post('http://10.0.2.2:3000/updateFirstLogin', { email });
+            console.log("UserData screen is about to navigate"); // Confirmación antes de la navegación
+    
             navigation.navigate('UserData');
         } catch (error) {
+            console.error("Error during choice submission:", error); // Muestra el error exacto
             Alert.alert("Error", "Unable to complete your choice.");
         }
     };
