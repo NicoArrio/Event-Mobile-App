@@ -136,10 +136,15 @@ function PlusInformation() {
                 }}>
                 <Picker.Item label="Seleccione una opción" value="" />                    
                 <Picker.Item label="Mojito" value="mojito" />
-                <Picker.Item label="Cuba Negra" value="cubanegra" />
+                <Picker.Item label="Daiquiri" value="Daiquiri" />
+                <Picker.Item label="Caipirinha" value="Caipirinha" />
+                <Picker.Item label="Caipiroska" value="Caipiroska" />
+                <Picker.Item label="Cuba Libre" value="cubalibre" />
                 <Picker.Item label="Tequila" value="tequila" />
+                <Picker.Item label="Gin Tonic" value="gintonic" />
                 <Picker.Item label="Ron" value="ron" />
                 <Picker.Item label="Vino + Manaos" value="vinomanaos" />
+                <Picker.Item label="No tomo Alcohol" value="No tomo" />
                 </Picker>
                 {!!alternativeOptionError && <Text style={styles.errorText}>{alternativeOptionError}</Text>}
             </View>
@@ -159,9 +164,10 @@ function PlusInformation() {
                 <Picker.Item label="Techno" value="techno" />
                 <Picker.Item label="Trap" value="trap" />
                 <Picker.Item label="Cumbia" value="cumbia" />
+                <Picker.Item label="Bachata" value="bachata" />
                 <Picker.Item label="Rock" value="rock" />
                 <Picker.Item label="Pop" value="pop" />
-                <Picker.Item label="'90 & '00" value="90s" />
+                <Picker.Item label="80' & 90'" value="90s" />
                 </Picker>
                 {!!favoriteGenreError && <Text style={styles.errorText}>{favoriteGenreError}</Text>}
             </View>

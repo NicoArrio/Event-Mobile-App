@@ -41,7 +41,6 @@ const addFriendLocal: FC<AddFriendModalProps> = ({ onClose, visible }) => {
         } catch (error) {
             console.log(error) 
         }
-        
     }
 
     const handleChoosePhoto = () => {

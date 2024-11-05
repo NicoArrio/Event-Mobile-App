@@ -27,8 +27,8 @@ const InfoEvent = () => {
                     Confirmen su asistencia lo antes posible para que podamos organizar 
                     todo de la mejor manera.</Text>
                 <Text style={styles.highlighted}>El sábado 21 de diciembre </Text>
-                <Text>se realizara el evento, la dirección es </Text>
-                <Text style={styles.highlighted}>Seguí 1414.</Text>
+                <Text>se realizara el evento. </Text>
+                {/* <Text style={styles.highlighted}>Seguí 1414.</Text> */}
                 </Text>
             </View>
         </View>
