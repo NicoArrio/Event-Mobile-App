@@ -14,7 +14,7 @@ import {useState} from 'react';
 import axios from 'axios';
 
 import BigHeader from '../../../components/Header/BigHeader';
-
+import { API_BASE_URL } from '@env';
 
 function Register () {
     const navigation=useNavigation();
@@ -35,7 +35,7 @@ function Register () {
       };
       if (emailVerify && passwordVerify && mobileVerify) {
         axios
-          .post('http://10.0.2.2:3000/register', userData)
+          .post(`${API_BASE_URL}/register`, userData)
           .then(res => {
             console.log(res.data);
             if (res.data.status == 'ok') {

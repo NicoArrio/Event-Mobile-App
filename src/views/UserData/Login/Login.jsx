@@ -16,6 +16,7 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import BigHeader from '../../../components/Header/BigHeader';
+import { API_BASE_URL } from '@env';
 
 
 function Login (props) {
@@ -31,7 +32,7 @@ function Login (props) {
       password,
     };
     axios
-      .post('http://10.0.2.2:3000/login', UserData)
+      .post(`${API_BASE_URL}/login`, UserData)
       .then(res=> {
         console.log(res.data);
         if (res.data.status== 'ok'){

@@ -36,19 +36,19 @@ const Friends = () => {
         loadUser().catch(null)
     },[]) 
 
-    //fetch de los datos de los usuarios 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await axios.get('http://10.0.2.2:3000/api/users');
-                setUser(response.data); // Asumiendo que `setUser` actualiza el estado con los datos de los usuarios
-            } catch (error) {
-                console.error("Error fetching users:", error);
-            }
-        };
+    // //fetch de los datos de los usuarios 
+    // useEffect(() => {
+    //     const fetchUsers = async () => {
+    //         try {
+    //             const response = await axios.get(`${API_BASE_URL}/api/users`);
+    //             setUser(response.data); // Asumiendo que `setUser` actualiza el estado con los datos de los usuarios
+    //         } catch (error) {
+    //             console.error("Error fetching users:", error);
+    //         }
+    //     };
     
-        fetchUsers();
-    }, []);
+    //     fetchUsers();
+    // }, []);
     
     //save and close exitoso del modal y reseteo
     const handleModalClose = async (shouldUpdate?: boolean) => {

@@ -12,10 +12,12 @@ import {
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
-
-import BigHeader from '../../../components/Header/BigHeader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+
+import { API_BASE_URL } from '@env';
+import BigHeader from '../../../components/Header/BigHeader';
+
 
 function PlusInformation() {
   const navigation = useNavigation();
@@ -39,7 +41,7 @@ function PlusInformation() {
         favoriteGenre,
         specialWish
       };
-      axios.post('http://10.0.2.2:3000/updatePlusInformation', { token, plusInformation })
+      axios.post(`${API_BASE_URL}/updatePlusInformation`, { token, plusInformation })
         .then((response) => {
           if (response.data.status === 'ok') {
             Alert.alert("Saved Successfully!");

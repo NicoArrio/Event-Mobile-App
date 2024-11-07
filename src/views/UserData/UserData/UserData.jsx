@@ -12,10 +12,12 @@ import {
 } from 'react-native';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { useNavigation } from '@react-navigation/native';
-
-import BigHeader from '../../../components/Header/BigHeader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+
+import { API_BASE_URL } from '@env';
+import BigHeader from '../../../components/Header/BigHeader';
+
 
 function UserData () {
     const navigation = useNavigation();
@@ -51,7 +53,7 @@ function UserData () {
                 job,
                 imageUri
             };
-            axios.post('http://10.0.2.2:3000/updateUserData', { token, userData })
+            axios.post(`${API_BASE_URL}/updateUserData`, { token, userData })
                 .then((response) => {
                     if (response.data.status === 'ok') {
                         Alert.alert("Saved Successfully!");
