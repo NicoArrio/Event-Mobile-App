@@ -37,7 +37,7 @@ function Choice() {
             console.log("Sending to backend:", { choice, guest: choice }); // Confirmación antes del envío al backend
             console.log("Email:", email); // Verificar email decodificado
     
-            const response = await axios.post(`${API_BASE_URL}/updateChoiceData`, {
+            const response = await axios.post('http://192.168.0.101:3000/updateChoiceData', {
                 token,
                 choiceData: { guest: choice, choice }
             });

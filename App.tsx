@@ -42,7 +42,7 @@ function App(): React.JSX.Element {
           fontWeight: '600',
         },
       }}>
-      <TabNav.Screen name="NewsTab" component={News} options={{
+      <TabNav.Screen name="News" component={News} options={{
         tabBarIcon: ({ focused }) => (
           <Icon name="calendar-alt" size={23} color={focused ? 'red' : 'black'} />
         ),

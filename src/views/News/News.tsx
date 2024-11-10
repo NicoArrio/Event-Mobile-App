@@ -10,21 +10,21 @@ import CalendarNews from "../../components/Header/NewsComponents/CalendarNews";
 import InfoEvent from "../../components/Header/NewsComponents/InfoEvent";
 
 import Header from "../../components/Header/Header";
-
+//import { API_BASE_URL } from '@env';
 
 function News() {
     const navigation = useNavigation();
 
-    async function getData(){
-        const token = await AsyncStorage.getItem('token');
-        console.log(token);
-        axios
-            .post('http://10.0.2.2:3000/userdata',{token:token})
-            .then(res => console.log(res.data));
-    }
-    useEffect(() => {
-        getData()
-    },[]);
+    // async function getData(){
+    //     const token = await AsyncStorage.getItem('token');
+    //     console.log(token);
+    //     axios
+    //         .post(`${API_BASE_URL}/userdata`,{token:token})
+    //         .then(res => console.log(res.data));
+    // }
+    // useEffect(() => {
+    //     getData()
+    // },[]);
 
     return(
         <ScrollView style={styles.container}> 

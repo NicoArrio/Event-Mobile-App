@@ -4,7 +4,7 @@ import FlipCard from 'react-native-flip-card';
 
 import { Guest } from "../../../types";
 
-const UsersContent: FC<Guest> = ({name,age,description, signo, imageUri}) => {
+const UsersContent: FC<Guest> = ({name,age,description,sign, imageUri}) => {
     return(
         <View style={styles.UserContainer}>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -22,10 +22,6 @@ const UsersContent: FC<Guest> = ({name,age,description, signo, imageUri}) => {
                         // Mostrar una imagen predeterminada o mantener el área vacía
                         <View style={styles.placeholderImage}></View>
                     )}
-                    {/* <Image
-                        source={require('../../../images/gaston.jpeg')}
-                        style={styles.image}
-                    /> */}
                     <View style={styles.textContainer}>
                         <Text style={styles.text}>{name}, {age}</Text> 
                     </View>
@@ -34,7 +30,7 @@ const UsersContent: FC<Guest> = ({name,age,description, signo, imageUri}) => {
                 {/* Cara trasera del FlipCard */}
                 <View style={[styles.cardContainer, styles.cardBack]}>
                     <Text style={styles.descriptionText}>
-                        {description}-{signo}
+                        {description}-{sign}
                     </Text>
                 </View>
             </FlipCard>

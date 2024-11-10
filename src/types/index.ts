@@ -13,7 +13,7 @@ export type Guest= {
     name: string;
     age: string;
     description: string;
-    signo: string;
+    sign: string;
     imageUri?: string; // Campo opcional para la URL de la imagen
 };
 

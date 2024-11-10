@@ -41,7 +41,7 @@ function PlusInformation() {
         favoriteGenre,
         specialWish
       };
-      axios.post(`${API_BASE_URL}/updatePlusInformation`, { token, plusInformation })
+      axios.post('http://192.168.0.101:3000/updatePlusInformation', { token, plusInformation })
         .then((response) => {
           if (response.data.status === 'ok') {
             Alert.alert("Saved Successfully!");

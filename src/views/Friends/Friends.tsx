@@ -4,88 +4,68 @@ import { Button, Icon, Input } from "@rneui/themed";
 
 import Headers from '../../components/Header/Header'
 import UsersContent from "../../components/Header/FriendsComponents/UsersContent";
-import AddFriendLocal from "../../components/Header/FriendsComponents/AddFriendLocal";
-import useFriendLocalStorage from "../../hooks/useFriendLocalStorage";
 import useUserCount from '../../hooks/useUserCount'; // Asegúrate de tener la ruta correcta
 import axios from "axios";
 
 import { Guest } from "../../types";
 
-const { onDeleteUser } = useFriendLocalStorage();
-
-
 const Friends = () => {
     //informacion guardada en estados
-    const [visible, setIsVisible] = useState<boolean>(false); //cons de estado reactiva, conforme le des click
     const [user, setUser] = useState<Guest[]>([]) //arreglo de usuarios, primer ciclo: vacio
     const [search, setSearch] = useState<string>('')
-    const {onGetUser} = useFriendLocalStorage()
     const userCount = useUserCount(); // Usar el hook para obtener el conteo actual
 
-    //mostrar los usuarios cuando este componente de monte
+    //cargar usuarios desde el backend
     const loadUser = async () => {
         try {
-            const userResponse = await onGetUser(); //trae todo lo guardado en el asyncStorage
-            setUser(userResponse); //guardamos respuesta en setUser
+            const response = await axios.get('http://192.168.0.101:3000/api/users');
+            setUser(response.data); // Guardamos la respuesta en el estado
         } catch (error) {
-            console.error(error)
+            console.error("Failed to load users:", error);
+            Alert.alert("Error", "Failed to load users.");
         }
-    }
-    //mostrar componente cuando cargue
-    useEffect(()=>{
-        loadUser().catch(null)
-    },[]) 
-
-    // //fetch de los datos de los usuarios 
-    // useEffect(() => {
-    //     const fetchUsers = async () => {
-    //         try {
-    //             const response = await axios.get(`${API_BASE_URL}/api/users`);
-    //             setUser(response.data); // Asumiendo que `setUser` actualiza el estado con los datos de los usuarios
-    //         } catch (error) {
-    //             console.error("Error fetching users:", error);
-    //         }
-    //     };
-    
-    //     fetchUsers();
-    // }, []);
-    
-    //save and close exitoso del modal y reseteo
-    const handleModalClose = async (shouldUpdate?: boolean) => {
-        if (shouldUpdate){
-            Alert.alert('User guardado Exitosamente')//si actualizamos, mostramos una alerta
-            loadUser()
-        }
-        setIsVisible(false);
     };
+    
+    useEffect(() => {
+        loadUser();
+    }, []); 
+
+    //fetch de los datos de los usuarios 
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await axios.get('http://192.168.0.101:3000/api/users');
+                setUser(response.data); // Asumiendo que `setUser` actualiza el estado con los datos de los usuarios
+            } catch (error) {
+                console.error("Error fetching users:", error);
+            }
+        };
+    
+        fetchUsers();
+    }, []);
+    
+    
 
     //buscar por nombre
     const handSearchPress = async () => {
+        if (!search.trim()) {
+            loadUser(); // Cargar todos los usuarios si el campo de búsqueda está vacío
+            return;
+        }
         try {
-            const result = await onGetUser() //traemos todos los usuarios
-            setUser(result.filter((item:Guest) => 
-                item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase()))) //filtramos, sin importar Mayus
+            const url = `http://192.168.0.101:3000/api/users/search?name=${encodeURIComponent(search)}`;
+            console.log("Requesting:", url);  // Esto te ayudará a ver qué URL se está llamando
+            const response = await axios.get(url);
+            setUser(response.data); // Actualiza el estado con los resultados de la búsqueda
         } catch (error) {
-            console.log(error)
-            setUser([])//seteame el arreglo, a un arreglo vacio
+            console.error("Error searching users:", error);
+            Alert.alert("Error", "Failed to search users.");
         }
     };
 
 
-    // //borrar usuario
-    const deleteUserByName = async (name: string): Promise<void>  => {
-        try {
-            await onDeleteUser(name);
-            console.log('Usuario eliminado');
-            // Luego de eliminar, actualiza la lista de usuarios
-            loadUser(); // Asumiendo que esta función recarga los usuarios desde AsyncStorage
-        } catch (error) {
-            console.error('Error al eliminar usuario:', error);
-        }
-    };
-    //deleteUserByName('fr'); //DESCOMENTAR Y COMENTAR RAPIDAMENTE
     return(
-        <ScrollView> 
+        <ScrollView style={styles.scrollContainer}> 
             <View style={styles.container}>
                 {/* COMPONENTE HEADER  */}
                 <Headers/>
@@ -118,27 +98,11 @@ const Friends = () => {
                     />
                 </View>
 
-                {/* COMPONENTE LOCAL PARA AGREGAR USUARIOS */}
-                <View style={styles.addFriendContainer}>
-                    <View style={styles.leftAddContainer}>
-                        <Text style={styles.listLegend}>Agregar Invitados</Text>
-                    </View>
-                    <View>
-                        <Button
-                            icon={<Icon name="add" color="#000" />}
-                            radius="lg"
-                            color="#ffff"
-                            onPress={() => setIsVisible(true)}
-                        />
-                    </View>
-                </View>
-
                 {/* COMPONENTE USUARIOS */}
                 <View style={styles.contentUsers}>
                     {user?.map(guest => (<UsersContent key={`my-user-content-${guest.name}`}{...guest}/>))}
                 </View>
 
-                <AddFriendLocal visible={visible} onClose={handleModalClose}/>
             </View>
         </ScrollView>
     )
@@ -147,6 +111,14 @@ const Friends = () => {
 
 
 const styles = StyleSheet.create({
+    fullHeightContainer: {
+        flex: 1,
+        backgroundColor: '#141414', // Asegúrate que el fondo sea negro
+    },
+    scrollContainer: {
+        flex: 1,
+        backgroundColor: '#141414',
+    },
     container: {
         flex: 1,
         padding: 12,

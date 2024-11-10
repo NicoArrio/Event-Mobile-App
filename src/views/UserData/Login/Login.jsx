@@ -32,7 +32,7 @@ function Login (props) {
       password,
     };
     axios
-      .post(`${API_BASE_URL}/login`, UserData)
+      .post('http://192.168.0.101:3000/login', UserData)
       .then(res=> {
         console.log(res.data);
         if (res.data.status== 'ok'){
