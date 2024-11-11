@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ScrollView, Alert} from "react-native";
 import { Button, Icon, Input } from "@rneui/themed";
 
-import Headers from '../../components/Header/Header'
+import Headers from '../../components/Header/Header';
 import UsersContent from "../../components/Header/FriendsComponents/UsersContent";
-import useUserCount from '../../hooks/useUserCount'; // Asegúrate de tener la ruta correcta
+import useUserCount from '../../hooks/useUserCount'; 
 import axios from "axios";
 
 import { Guest } from "../../types";
