@@ -11,7 +11,7 @@ const User = () => {
                     <Text style={styles.profileText}>Nicolas Arriola, 22</Text>
                 </View>
                 <View style={styles.profileItem}>
-                    <Text style={styles.profileText}>Licenciatura en informática</Text>
+                    <Text style={styles.profileText}>Licenciatura en informáticaa</Text>
                 </View>
                 <View style={styles.profileItem}>
                     <Text style={styles.profileText}>Desarrollador Móvil</Text>
