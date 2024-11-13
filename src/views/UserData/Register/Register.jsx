@@ -35,7 +35,7 @@ function Register () {
       };
       if (emailVerify && passwordVerify && mobileVerify) {
         axios
-          .post('http://192.168.0.101:3000/register', userData)
+          .post('http://192.168.0.40:3000/register', userData)
           .then(res => {
             console.log(res.data);
             if (res.data.status == 'ok') {

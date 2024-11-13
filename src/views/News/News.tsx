@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { View,Text,StyleSheet,Image,ScrollView} from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 import {useNavigation} from '@react-navigation/native';

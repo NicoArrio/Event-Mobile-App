@@ -53,7 +53,7 @@ function UserData () {
                 job,
                 imageUri
             };
-            axios.post('http://192.168.0.101:3000/updateUserData', { token, userData })
+            axios.post('http://192.168.0.40:3000/updateUserData', { token, userData })
                 .then((response) => {
                     if (response.data.status === 'ok') {
                         Alert.alert("Saved Successfully!");

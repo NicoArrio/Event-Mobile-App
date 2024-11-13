@@ -37,13 +37,13 @@ function Choice() {
             console.log("Sending to backend:", { choice, guest: choice }); // Confirmación antes del envío al backend
             console.log("Email:", email); // Verificar email decodificado
     
-            const response = await axios.post('http://192.168.0.101:3000/updateChoiceData', {
+            const response = await axios.post('http://192.168.0.40:3000/updateChoiceData', {
                 token,
                 choiceData: { guest: choice, choice }
             });
             console.log("Response from updateChoiceData:", response.data); // Confirmación de la respuesta del backend
     
-            await axios.post(`${API_BASE_URL}/updateFirstLogin`, { email });
+            await axios.post('http://192.168.0.40:3000/updateFirstLogin', { email });
             console.log("UserData screen is about to navigate"); // Confirmación antes de la navegación
     
             navigation.navigate('UserData');

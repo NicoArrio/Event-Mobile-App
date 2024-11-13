@@ -18,7 +18,7 @@ const Friends = () => {
     //cargar usuarios desde el backend
     const loadUser = async () => {
         try {
-            const response = await axios.get('http://192.168.0.101:3000/api/users');
+            const response = await axios.get('http://192.168.0.40:3000/api/users');
             setUser(response.data); // Guardamos la respuesta en el estado
         } catch (error) {
             console.error("Failed to load users:", error);
@@ -34,7 +34,7 @@ const Friends = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://192.168.0.101:3000/api/users');
+                const response = await axios.get('http://192.168.0.40:3000/api/users');
                 setUser(response.data); // Asumiendo que `setUser` actualiza el estado con los datos de los usuarios
             } catch (error) {
                 console.error("Error fetching users:", error);
@@ -111,10 +111,6 @@ const Friends = () => {
 
 
 const styles = StyleSheet.create({
-    fullHeightContainer: {
-        flex: 1,
-        backgroundColor: '#141414', // Asegúrate que el fondo sea negro
-    },
     scrollContainer: {
         flex: 1,
         backgroundColor: '#141414',
@@ -132,6 +128,7 @@ const styles = StyleSheet.create({
     },
     leftContainer:{
         flex:1,
+        
     },
     listLegend:{
         color:'#ffff',
