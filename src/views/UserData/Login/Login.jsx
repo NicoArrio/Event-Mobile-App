@@ -32,7 +32,7 @@ function Login (props) {
       password,
     };
     axios
-      .post('http://192.168.0.40:3000/login', UserData)
+      .post(`${API_BASE_URL}/login`, UserData)
       .then(res=> {
         console.log(res.data);
         if (res.data.status== 'ok'){
@@ -121,7 +121,7 @@ function Login (props) {
         </View>
 
         {/* L O G I N   I N   G O O G L E */}
-        <TouchableOpacity style={styles.inBut} onPress={() => Alert('Coming Soon')}>
+        <TouchableOpacity style={styles.inBut} onPress={() => Alert.alert("Coming Soon","will be implemented in future updates")}>
           
           <View style={styles.googleContainer}>
             <View style={styles.leftGoogleContainer}>

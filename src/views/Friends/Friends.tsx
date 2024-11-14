@@ -6,6 +6,7 @@ import Headers from '../../components/Header/Header';
 import UsersContent from "../../components/Header/FriendsComponents/UsersContent";
 import useUserCount from '../../hooks/useUserCount'; 
 import axios from "axios";
+import { API_BASE_URL } from '@env';
 
 import { Guest } from "../../types";
 
@@ -18,7 +19,7 @@ const Friends = () => {
     //cargar usuarios desde el backend
     const loadUser = async () => {
         try {
-            const response = await axios.get('http://192.168.0.40:3000/api/users');
+            const response = await axios.get(`${API_BASE_URL}/api/users`);
             setUser(response.data); // Guardamos la respuesta en el estado
         } catch (error) {
             console.error("Failed to load users:", error);
@@ -34,7 +35,7 @@ const Friends = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://192.168.0.40:3000/api/users');
+                const response = await axios.get(`${API_BASE_URL}/api/users`);
                 setUser(response.data); // Asumiendo que `setUser` actualiza el estado con los datos de los usuarios
             } catch (error) {
                 console.error("Error fetching users:", error);
@@ -53,7 +54,7 @@ const Friends = () => {
             return;
         }
         try {
-            const url = `http://192.168.0.101:3000/api/users/search?name=${encodeURIComponent(search)}`;
+            const url = `${API_BASE_URL}/api/users?name=${encodeURIComponent(search)}`;
             console.log("Requesting:", url);  // Esto te ayudará a ver qué URL se está llamando
             const response = await axios.get(url);
             setUser(response.data); // Actualiza el estado con los resultados de la búsqueda
@@ -84,7 +85,7 @@ const Friends = () => {
                 <View style={styles.searchContainer}>
                     <View style={styles.InputContainer}>
                         <Input 
-                            placeholder="buscar..."
+                            placeholder="buscar por nombre ..."
                             //leftIcon={{ type: 'add', name: 'search'}}
                             value={search}
                             onChangeText={(text: string) => setSearch(text)}
