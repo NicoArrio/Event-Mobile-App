@@ -54,7 +54,7 @@ const Friends = () => {
             return;
         }
         try {
-            const url = `${API_BASE_URL}/api/users?name=${encodeURIComponent(search)}`;
+            const url = `${API_BASE_URL}/api/users/search?name=${encodeURIComponent(search)}`;
             console.log("Requesting:", url);  // Esto te ayudará a ver qué URL se está llamando
             const response = await axios.get(url);
             setUser(response.data); // Actualiza el estado con los resultados de la búsqueda
@@ -86,6 +86,8 @@ const Friends = () => {
                     <View style={styles.InputContainer}>
                         <Input 
                             placeholder="buscar por nombre ..."
+                            inputContainerStyle={{}}
+                            inputStyle={{color: 'white'}}
                             //leftIcon={{ type: 'add', name: 'search'}}
                             value={search}
                             onChangeText={(text: string) => setSearch(text)}
