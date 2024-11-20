@@ -9,7 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { RootStackParamList } from '../../types'; // Asume que tus tipos están en un archivo llamado types.ts
 
 //sacar lo rojo de replace 
-//aclarar que funciona el componente
+//aclarar que funciona el componentee
 const Stack = createStackNavigator<RootStackParamList>();
 
 import Headers from '../../components/Header/Header';
