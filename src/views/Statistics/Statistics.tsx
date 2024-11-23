@@ -14,7 +14,7 @@ const chartConfig = {
   color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
   strokeWidth: 2, // ancho de la línea del gráfico
   barPercentage: 0.5,
-  useShadowColorFromDataset: false // color de sombra opcional desde el conjunto de datos
+  useShadowColorFromDataset: false // color de sombra opcional desde el conjunto de datoss
 };
 
 const Statistics = () => {
