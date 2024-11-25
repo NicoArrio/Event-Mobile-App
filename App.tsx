@@ -18,6 +18,7 @@ import News from './src/views/News';
 import Friends from './src/views/Friends';
 import Statistics from './src/views/Statistics';
 import User from './src/views/User';
+import EditProfile from './src/views/EditProfile/EditProfile';
 
 
 function App(): React.JSX.Element {
@@ -54,12 +55,12 @@ function App(): React.JSX.Element {
         ),
         headerShown: false
       }} />
-      <TabNav.Screen name="Statistics" component={Statistics} options={{
+      {/* <TabNav.Screen name="Statistics" component={Statistics} options={{
         tabBarIcon: ({ focused }) => (
           <Icon name="chart-line" size={23} color={focused ? 'red' : 'black'} />
         ),
         headerShown: false
-      }} />
+      }} /> */}
       <TabNav.Screen name="User" component={User} options={{
         tabBarIcon: ({ focused }) => (
           <Icon name="user-alt" size={23} color={focused ? 'red' : 'black'} />
@@ -78,6 +79,17 @@ function App(): React.JSX.Element {
         <Stack.Screen name="UserData" component={UserData} />
         <Stack.Screen name="PlusInformation" component={PlusInformation}/>
         <Stack.Screen name="HomeNews" component={TabNavigator}/>
+        <Stack.Screen
+          name="EditProfile"
+          component={EditProfile}
+          options={{
+            headerShown: true, // Habilitar la cabecera
+            title: 'Edit Profile', // Personalizar el título
+            headerStyle: {backgroundColor:'#141414'},
+            headerTintColor:'#fff',
+            headerTitleAlign:'center'
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

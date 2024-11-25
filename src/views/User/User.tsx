@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, Image, ScrollView, StyleSheet } from "react-native";
-import { Button, Icon, Input } from "@rneui/themed";
+import { Button, Icon } from "@rneui/themed";
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { RootStackParamList } from '../../types'; // Asume que tus tipos están en un archivo llamado types.ts
-
-//sacar lo rojo de replace 
-//aclarar que funciona el componentee
-const Stack = createStackNavigator<RootStackParamList>();
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../types'; 
 
 import Headers from '../../components/Header/Header';
 import { API_BASE_URL } from "@env";
@@ -32,6 +28,7 @@ const User = () => {
     }
 
     const [userData, setUserData] = useState<UserData | null>(null);
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -51,11 +48,9 @@ const User = () => {
         fetchUserData();
     }, []);
 
-    const navigation = useNavigation(); // Hook para usar la navegación
-
     const handleLogout = async () => {
-        await AsyncStorage.removeItem('token'); // Limpia el token guardado
-        navigation.replace('Login'); // Navega a la pantalla de login sin volver atrás
+        await AsyncStorage.removeItem('token'); 
+        navigation.replace('Login'); 
     };
 
     return (
@@ -75,11 +70,11 @@ const User = () => {
                     <View style={styles.listContainer}>
                         <View style={styles.leftContainer}>
                             <View style={styles.profilePicSection}>
-                                    {userData.imageUri ? (
-                                        <Image source={{ uri: userData.imageUri }} style={styles.profilePic} />
-                                    ) : (
-                                        <View style={styles.placeholderImage}></View>
-                                    )}
+                                {userData.imageUri ? (
+                                    <Image source={{ uri: userData.imageUri }} style={styles.profilePic} />
+                                ) : (
+                                    <View style={styles.placeholderImage}></View>
+                                )}
                             </View>
                         </View>
                         <View style={styles.rightContainer}>
@@ -155,6 +150,7 @@ const User = () => {
                         </View>
                     </View>
 
+                    {/* B U T T O N    E D I T    P R O F I L E */}
                     <View style={styles.buttonContainer}>
                         <Button 
                             title=" Edite Profile" 
@@ -167,9 +163,11 @@ const User = () => {
                                 marginHorizontal: 80,
                                 marginVertical: 10,
                             }}
+                            onPress={() => navigation.navigate("EditProfile")}
                         />
                     </View>
-
+                    
+                    {/* B U T T O N    L O G   O UT */}
                     <View style={styles.buttonContainer}>
                         <Button 
                             title=" Log out" 
@@ -263,10 +261,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         
     },
-    buttonContainer: {
-        marginBottom: 10,
-        width: '100%',
-    },
+    
     // PLUS INFORMATION
     plusInfoSection: {
         padding: 1,
@@ -316,9 +311,12 @@ const styles = StyleSheet.create({
         color: 'white',
         fontFamily: 'RobotoMono-Regular',
         fontSize: 16,
-    
     },
-    
+    //BUTTON
+    buttonContainer: {
+        marginBottom: 10,
+        width: '100%',
+    },
 });
 
 export default User;

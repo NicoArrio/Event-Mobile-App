@@ -58,7 +58,7 @@
     "typescript": "5.0.4"
   },
   "resolutions": {
-    "react-native-svg": "15.2.0"
+    "react-native-svg": "15.9.0"
   },
   "engines": {
     "node": ">=18"

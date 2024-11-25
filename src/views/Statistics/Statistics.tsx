@@ -30,7 +30,7 @@ const Statistics = () => {
     return(
         <ScrollView style={styles.container}>
             <Headers />
-            <BarChart
+            {/* <BarChart
                 style={styles.graphStyle} // Usar estilo definido en styles
                 data={data}
                 width={screenWidth} // Ancho dinámico de la pantalla
@@ -39,7 +39,7 @@ const Statistics = () => {
                 yAxisSuffix="k" // Añadir sufijo al eje Y, si no se necesita, puede ser una cadena vacía ""
                 chartConfig={chartConfig}
                 verticalLabelRotation={30}
-            />
+            /> */}
         </ScrollView>
     )
 }

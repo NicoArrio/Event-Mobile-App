@@ -6,6 +6,7 @@ export type RootStackParamList = {
     PlusInformation: undefined;
     HomeNews: undefined;
     User: undefined;
+    EditProfile: undefined;
 };
 
 export type Guest= {
