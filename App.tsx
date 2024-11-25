@@ -19,7 +19,8 @@ import Friends from './src/views/Friends';
 import Statistics from './src/views/Statistics';
 import User from './src/views/User';
 import EditProfile from './src/views/EditProfile/EditProfile';
-
+//context
+import { UserProvider } from './src/context/UserContext';
 
 function App(): React.JSX.Element {
 
@@ -71,30 +72,30 @@ function App(): React.JSX.Element {
   );
   
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="Choice" component={Choice} />
-        <Stack.Screen name="UserData" component={UserData} />
-        <Stack.Screen name="PlusInformation" component={PlusInformation}/>
-        <Stack.Screen name="HomeNews" component={TabNavigator}/>
-        <Stack.Screen
-          name="EditProfile"
-          component={EditProfile}
-          options={{
-            headerShown: true, // Habilitar la cabecera
-            title: 'Edit Profile', // Personalizar el título
-            headerStyle: {backgroundColor:'#141414'},
-            headerTintColor:'#fff',
-            headerTitleAlign:'center'
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <UserProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="Choice" component={Choice} />
+          <Stack.Screen name="UserData" component={UserData} />
+          <Stack.Screen name="PlusInformation" component={PlusInformation}/>
+          <Stack.Screen name="HomeNews" component={TabNavigator}/>
+          <Stack.Screen
+            name="EditProfile"
+            component={EditProfile}
+            options={{
+              headerShown: true, // Habilitar la cabecera
+              title: 'Edit Profile', // Personalizar el título
+              headerStyle: {backgroundColor:'#141414'},
+              headerTintColor:'#fff',
+              headerTitleAlign:'center'
+            }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </UserProvider>
   );
 }
-
-
 
 export default App;

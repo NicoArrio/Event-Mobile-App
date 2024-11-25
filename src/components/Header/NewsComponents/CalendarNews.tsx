@@ -15,9 +15,9 @@ const CalendarNews = () => {
                     <View style={styles.BubbleContainerImage}>
                         <View style={styles.bubble}>
                             <Image 
-                            source={require('../../../images/tequila.jpeg')} 
+                            source={require('../../../images/banda.jpeg')} 
                             style={styles.bubbleImage}/>
-                            <Text style={styles.bubbleText}>Tequila</Text>
+                            <Text style={styles.bubbleText}>Banda en vivo</Text>
                         </View>
                     </View>
                     
@@ -26,7 +26,16 @@ const CalendarNews = () => {
                             <Image 
                             source={require('../../../images/dj.png')} 
                             style={styles.bubbleImage}/>
-                            <Text style={styles.bubbleText}>Habra DJ!!</Text>
+                            <Text style={styles.bubbleText}>Habra DJ</Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.BubbleContainerImage}>
+                        <View style={styles.bubble}>
+                            <Image 
+                            source={require('../../../images/metegol.jpeg')} 
+                            style={styles.bubbleImage}/>
+                            <Text style={styles.bubbleText}>Metegol</Text>
                         </View>
                     </View>
 
@@ -47,6 +56,17 @@ const CalendarNews = () => {
                             <Text style={styles.bubbleText}>Pizza para el bajon</Text>
                         </View>
                     </View>
+
+                    <View style={styles.BubbleContainerImage}>
+                        <View style={styles.bubble}>
+                            <Image 
+                            source={require('../../../images/tequila.jpeg')} 
+                            style={styles.bubbleImage}/>
+                            <Text style={styles.bubbleText}>Tequila</Text>
+                        </View>
+                    </View>
+                    
+
                     
                 </ScrollView>
         </View>

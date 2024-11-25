@@ -17,41 +17,49 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import BigHeader from '../../../components/Header/BigHeader';
 import { API_BASE_URL } from '@env';
+import { useUser } from '../../../context/UserContext'; 
 
 
 function Login (props) {
   const navigation = useNavigation();
   const [email,setEmail] = useState('');
+  const { setUserData } = useUser();
   const [password,setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  function handleSubmit(){
-    //console.log(email,password);
-    const UserData={
-      email:email,
+  async function handleSubmit() {
+    const UserData = {
+      email: email,
       password,
     };
-    axios
-      .post(`${API_BASE_URL}/login`, UserData)
-      .then(res=> {
-        console.log(res.data);
-        if (res.data.status== 'ok'){
-          //Alert.alert('Logged in Succesfull');
-          AsyncStorage.setItem('token', res.data.data);
-          if (res.data.isFirstLogin) {
-            navigation.navigate('Choice');
-          } else {
-            navigation.navigate('HomeNews');
-          }
-        }
-      })
-      .catch(error => {
-        console.error("Login Error:", error);
-        Alert.alert("Login Error", "Failed to connect to the server.");
-      });
-      ;
-      
 
+    try {
+      const res = await axios.post(`${API_BASE_URL}/login`, UserData);
+      console.log(res.data);
+
+      if (res.data.status === 'ok') {
+        const token = res.data.data;
+        const user = res.data.user; // Asegúrate de que la API devuelva los datos del usuario
+
+        // Guardar el token en AsyncStorage
+        await AsyncStorage.setItem('token', token);
+
+        // Actualizar el estado global con los datos del usuario
+        setUserData(user);
+
+        // Navegar a la pantalla correspondiente
+        if (res.data.isFirstLogin) {
+          navigation.navigate('Choice');
+        } else {
+          navigation.navigate('HomeNews');
+        }
+      } else {
+        Alert.alert('Login Error', res.data.message || 'Invalid credentials');
+      }
+    } catch (error) {
+      console.error('Login Error:', error);
+      Alert.alert('Login Error', 'Failed to connect to the server.');
+    }
   }
 
   return (

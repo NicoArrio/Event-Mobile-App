@@ -192,7 +192,7 @@ function PlusInformation() {
 
             {/* B U T T O N    S A V E D */}
             <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-                <Text style={styles.saveButtonText}>Save</Text>
+              <Text style={styles.saveButtonText}>Save</Text>
             </TouchableOpacity>
         </ScrollView>
     </KeyboardAvoidingView>

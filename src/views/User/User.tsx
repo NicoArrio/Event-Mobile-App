@@ -9,6 +9,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../../types'; 
 
 import Headers from '../../components/Header/Header';
+import { useUser } from "../../context/UserContext";
 import { API_BASE_URL } from "@env";
 
 const User = () => {
@@ -27,7 +28,8 @@ const User = () => {
         specialWish: string;
     }
 
-    const [userData, setUserData] = useState<UserData | null>(null);
+    const { clearUserData } = useUser(); // Obtén la función del contexto
+    const { userData, setUserData } = useUser(); // Usa el contexto
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
     useEffect(() => {
@@ -49,9 +51,12 @@ const User = () => {
     }, []);
 
     const handleLogout = async () => {
-        await AsyncStorage.removeItem('token'); 
+        await AsyncStorage.removeItem('token');
+        clearUserData(); // Limpia los datos del contexto
         navigation.replace('Login'); 
     };
+
+    if (!userData) return <Text>Loading...</Text>;
 
     return (
         <ScrollView style={styles.container}>
@@ -60,8 +65,9 @@ const User = () => {
             {/* D A T A    P R O F I L E */}
             {userData ? (
                 <View style={styles.profileSection}>
+
                     <View style={styles.nameAgeSection}>
-                        <Text style={styles.text}>{`${userData.name} ${userData.lastName}, ${userData.age}`}</Text>
+                        <Text style={styles.text}>{`${userData.name} ${userData.lastName}, ${userData.age ? userData.age.toString() : "No especificada"}`}</Text>
                     </View>
                     <View style={styles.nameAgeSection}>
                         <Text style={styles.text}>{`Signo Zodiacal: ${userData.sign}`}</Text>
@@ -301,7 +307,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     dreamAnswerSection: {
-        height: 100,
+        height: 150,
         backgroundColor: '#333333',
         borderRadius: 30,
         padding: 10,
